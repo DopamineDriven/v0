@@ -1,11 +1,10 @@
 import * as React from "react"
+import {TsxExcludeExp, TsxTargetedExp} from "@/types/helpers";
+import { cn } from "@/lib/utils";
 
-import { cn } from "@/lib/utils"
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
+const Input = React.forwardRef<TsxTargetedExp<"input", "element">, TsxTargetedExp<"input", "attribute">>(
   ({ className, type, ...props }, ref) => {
     return (
       <input

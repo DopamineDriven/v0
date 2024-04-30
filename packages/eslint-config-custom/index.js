@@ -1,9 +1,9 @@
-const { relative } = require("node:path");
+const { resolve } = require("node:path");
 
 // https://github.com/vercel/turbo/blob/04-05-feat_turborepo_support_inputs_for_file_hash_watching/examples/with-tailwind/packages/config-eslint/next.js
 
-const project = relative(process.cwd(), "tsconfig.json");
-/**@type {import("eslint/index").ESLint.ConfigData} */
+const project = resolve(process.cwd(), "tsconfig.json");
+/**@type {import("eslint/index").Linter.Config} */
 module.exports = {
   extends: [
     "@vercel/style-guide/eslint/node",
@@ -140,13 +140,11 @@ module.exports = {
       }
     }
   },
-  ignorePatterns: [".*.js", "node_modules/", "dist/", ".eslintrc.js"],
+
+  ignorePatterns: [".*.js", "node_modules/", "dist/", ".eslintrc.js", "!**/*"],
   parserOptions: {
     sourceType: "module",
     ecmaVersion: "latest",
-    project: [project, "../../tsconfig.json"],
-    babelOptions: {
-      presets: [require.resolve("next/babel")]
-    }
+    project: [project, "../../tsconfig.json"]
   }
 };

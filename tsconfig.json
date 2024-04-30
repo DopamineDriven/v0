@@ -1,11 +1,12 @@
 {
-  "include": ["prettier.config.mjs", ".eslintrc.cjs"],
+  "include": ["prettier.config.mjs", ".eslintrc.cjs", "reset.d.ts"],
   "compilerOptions": {
     /* LANGUAGE COMPILATION OPTIONS */
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext", "ScriptHost"],
     "module": "Node16",
     "moduleResolution": "NodeNext",
+    "baseUrl": "./",
     "resolveJsonModule": true,
     "allowJs": true,
     "checkJs": true,

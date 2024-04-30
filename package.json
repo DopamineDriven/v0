@@ -1,5 +1,6 @@
 {
-  "name": "v0",
+  "name": "@dd/root",
+  "version": "0.0.0",
   "author": {
     "email": "andrew.ross@takeda.com",
     "name": "Andrew Ross",
@@ -73,16 +74,16 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
+    "@dd/eslint-config": "workspace:*",
     "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
     "@total-typescript/ts-reset": "^0.5.1",
-    "@typescript-eslint/eslint-plugin": "^7.7.1",
-    "@typescript-eslint/parser": "^7.7.1",
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "@typescript-eslint/parser": "^7.8.0",
     "@types/node": "^20.12.7",
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.1",
     "dotenv-expand": "^11.0.6",
     "eslint": "^8.57.0",
-    "eslint-config-custom": "workspace:*",
     "eslint-config-turbo": "latest",
     "husky": "^9.0.11",
     "prettier": "^3.2.5",
