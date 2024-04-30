@@ -42,7 +42,7 @@
     "build:ui": "turbo build --filter=\\@dd/ui",
     "build:utils": "turbo build --filter=\\@dd/utils",
     "build:web": "turbo build --filter=\\@dd/web",
-    "clean:house": "cd apps/web && rm -rf node_modules .turbo .next && cd ../../packages/eslint-config-custom && rm -rf node_modules && cd ../.. && rm -rf node_modules pnpm-lock.yaml && pnpm install && pnpm build:targeted",
+    "clean:house": "cd apps/web && rm -rf node_modules .turbo .next && cd ../../packages/eslint-config && rm -rf node_modules && cd ../prettier && rm -rf node_modules && cd ../.. && rm -rf node_modules pnpm-lock.yaml && pnpm install && pnpm build:targeted",
     "condense:privatekey": "awk -v ORS='\\n' '1' private.pem",
     "condense:publickey": "awk -v ORS='\\n' '1' public.pem",
     "generate:privatekey": "openssl genrsa -out private.pem 2048",
@@ -74,20 +74,14 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
-    "@dd/eslint-config": "workspace:*",
-    "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
+    "@dd/prettier": "workspace:*",
     "@total-typescript/ts-reset": "^0.5.1",
-    "@typescript-eslint/eslint-plugin": "^7.8.0",
-    "@typescript-eslint/parser": "^7.8.0",
     "@types/node": "^20.12.7",
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.1",
     "dotenv-expand": "^11.0.6",
-    "eslint": "^8.57.0",
-    "eslint-config-turbo": "latest",
     "husky": "^9.0.11",
     "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.5.14",
     "stylelint": "^16.4.0",
     "stylelint-config-recommended": "^14.0.0",
     "tsx": "^4.7.3",
@@ -95,5 +89,6 @@
     "typescript": "^5.4.5",
     "vercel": "latest"
   },
+  "prettier": "@dd/prettier",
   "keywords": []
 }

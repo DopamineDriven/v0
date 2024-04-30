@@ -34,7 +34,7 @@ import {
   DialogTrigger
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { TsxExcludeExp, TsxTargetedExp } from "@/types/helpers";
+import type { TsxExcludeExp } from "@/types/helpers";
 
 export function SearchComponent() {
   return (
@@ -53,7 +53,7 @@ export function SearchComponent() {
           <div className='relative'>
             <SearchIcon className='absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500 dark:text-gray-400' />
             <Input
-              className='w-full appearance-none rounded-md bg-white pl-10 shadow-none dark:bg-gray-950'
+              className='w-full placeholder-gray-500 appearance-none rounded-md bg-white pl-10 shadow-none dark:bg-gray-950'
               placeholder='Search for products...'
               type='search'
             />

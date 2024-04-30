@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { BasisGrotesquePro } from "@/styles/fonts";
+import "./index.css";
 
 export const viewport = {
   themeColor: "#0a0a0a",

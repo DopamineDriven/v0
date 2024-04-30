@@ -3,8 +3,9 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext", "ScriptHost"],
-    "module": "Node16",
-    "moduleResolution": "NodeNext",
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
+    "moduleDetection": "force",
     "disableSourceOfProjectReferenceRedirect": true,
     "resolveJsonModule": true,
     "allowJs": true,

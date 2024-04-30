@@ -1,4 +1,4 @@
-/**@type {import("eslint/index").ESLint.ConfigData} */
+/**@type {import("eslint").ESLint.ConfigData} */
 export default {
   extends: ["eslint:recommended", "prettier", "turbo"],
   env: {

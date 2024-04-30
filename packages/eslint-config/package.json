@@ -1,0 +1,30 @@
+{
+  "name": "@dd/eslint-config",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./base.js",
+    "./next": "./next.js",
+    "./library": "./library.js",
+    "./express": "./express.js",
+    "./react": "./react.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@next/eslint-plugin-next": "latest",
+    "typescript-eslint": "^7.8.0",
+    "eslint-config-turbo": "latest",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.2"
+  },
+  "devDependencies": {
+    "@dd/prettier": "workspace:*",
+    "@dd/tsconfig": "workspace:*",
+    "eslint": "^9.1.1",
+    "prettier": "^3.2.5"
+  },
+  "prettier": "@dd/prettier"
+}
