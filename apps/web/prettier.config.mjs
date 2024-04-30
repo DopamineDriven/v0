@@ -19,7 +19,18 @@ export default {
     "@ianvs/prettier-plugin-sort-imports",
     "prettier-plugin-tailwindcss"
   ],
-  importOrder: ["<THIRD_PARTY_MODULES>", "^@/", "^[.][.]/", "^[.]/"],
+  importOrder: [    "<TYPES>",
+  "^(react/(.*)$)|^(react$)",
+  "^(next/(.*)$)|^(next$)",
+  "<THIRD_PARTY_MODULES>",
+  "",
+  "<TYPES>^@dd",
+  "^@dd/(.*)$",
+  "",
+  "<TYPES>^[.|..|~]",
+  "^~/",
+  "^[../]",
+  "^[./]",],
   importOrderParserPlugins: ["typescript", "jsx", "decorators-legacy"],
   importOrderTypeScriptVersion: "5.4.5"
 };

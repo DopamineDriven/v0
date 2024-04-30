@@ -10,33 +10,20 @@ export default withPWAInit({ dest: "public", register: true, scope: "/app" })({
     remotePatterns: [
       {
         hostname: "localhost",
-        port: "3004",
+        port: "3000",
         protocol: "http"
       },
       {
-        hostname: "takeda-ai-sync.vercel.app",
+        hostname: "ddd.vercel.app",
         protocol: "https"
       },
       {
-        hostname: "dev-takeda-ai-sync.vercel.app",
+        hostname: "dev-ddd.vercel.app",
         protocol: "https"
       },
       { hostname: "res.cloudinary.com", protocol: "https" },
-      {
-        hostname: "latency-dsn.algolia.net",
-        protocol: "https"
-      },
-      { hostname: "assets-dam.takeda.com", protocol: "https" },
       { hostname: "images.unsplash.com", protocol: "https" },
-      { hostname: "tailwindui.com", protocol: "https" },
-      {
-        hostname: "futurebot-standard1-search.azurewebsites.net",
-        protocol: "https"
-      },
-      {
-        hostname: "futurebot-search-eu-standard1.azurewebsites.net",
-        protocol: "https"
-      }
+      { hostname: "tailwindui.com", protocol: "https" }
     ]
   },
   productionBrowserSourceMaps: true,

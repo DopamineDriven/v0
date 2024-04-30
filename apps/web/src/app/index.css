@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+    Chrome has a bug with transitions on load since 2012!
+    To prevent a "pop" of content, you have to disable all transitions until
+    the page is done loading.
+    https://lab.laukstein.com/bug/input
+    https://twitter.com/timer150/status/1345217126680899584
+    */
+body.loading * {
+  transition: none !important;
+}
+
+* > div::webkit-scrollbar {
+  display: thin;
+  width: 0.5625rem;
+}
+
+* > div::webkit-scrollbar-track {
+  background-color: #374151;
+}
+* > div::webkit-scrollbar-thumb {
+  @apply border-collapse rounded-[0.03125rem] border-gray-600 bg-gray-1100;
+}

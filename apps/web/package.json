@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "next dev -p ${PORT:=3000} --turbo",
     "build": "next build",
-    "postbuild": "next-sitemap --config next-sitemap.mjs",
     "check": "prettier --check \"**/*.{ts,tsx,cts,mts,mdx,js,jsx,mjs,cjs,json}\" --ignore-unknown --cache",
     "format": "prettier --write \"**/*.{ts,tsx,cts,mts,mdx,js,jsx,mjs,cjs,json}\" --ignore-unknown --cache",
     "start": "next start",
