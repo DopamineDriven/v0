@@ -1,0 +1,59 @@
+{
+  "editor.bracketPairColorization.enabled": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "css.hover.documentation": true,
+  "css.completion.completePropertyWithSemicolon": true,
+  "css.format.newlineBetweenSelectors": true,
+  "css.hover.references": true,
+  "css.format.enable": true,
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "eslint.workingDirectories": ["apps", "packages"],
+  "C_Cpp.dimInactiveRegions": false,
+  "yaml.validate": true,
+  "yaml.hover": true,
+  "prettier.enableDebugLogs": true,
+  "prettier.trailingComma": "none",
+  "prettier.useEditorConfig": true,
+  "prettier.resolveGlobalModules": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.bracketSameLine": true,
+  "prettier.arrowParens": "avoid",
+  "files.autoSave": "afterDelay",
+  "openInDefaultBrowser.run.openWithLocalHttpServer": false,
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "classNames",
+    "ngClass",
+    "rootClassName",
+    ".*Variant.*",
+    "cva",
+    "variant",
+    "configureVariants",
+    ".*variant.*",
+    ".*Styles.*" // Add ".*Styles.*" (or whatever matches your naming scheme)
+  ],
+  "stylelint.configFile": ".stylelintrc.js",
+  "gitlens.statusBar.enabled": true,
+  "editor.suggest.showStatusBar": true,
+  "typescript.locale": "en",
+  "typescript.referencesCodeLens.enabled": true,
+  "typescript.experimental.tsserver.web.typeAcquisition.enabled": true,
+  "typescript.implementationsCodeLens.enabled": true,
+  "javascript.referencesCodeLens.showOnAllFunctions": true,
+  "typescript.implementationsCodeLens.showOnInterfaceMethods": true,
+  "typescript.referencesCodeLens.showOnAllFunctions": true,
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

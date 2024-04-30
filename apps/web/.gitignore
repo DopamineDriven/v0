@@ -1,0 +1,9 @@
+.vercel
+.turbo
+.env
+.env.*
+*.mp4
+public/media/*.ts
+src/generated/cloudinary/media/panorama_*/*
+src/generated/cloudinary/panorama_*/*
+notes.md

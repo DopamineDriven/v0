@@ -1,0 +1,11 @@
+node_modules/*
+storybook-static
+.next
+dist
+.changeset
+generated
+*.md
+pnpm-lock.yaml
+.tsup
+packages/azai-db/client
+
