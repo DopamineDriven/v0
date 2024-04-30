@@ -1,5 +1,3 @@
-/// <reference types="./types.d.ts" />
-
 import nextPlugin from "@next/eslint-plugin-next";
 
 /** @type {Awaited<import('typescript-eslint').Config>} */

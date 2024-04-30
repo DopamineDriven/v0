@@ -7,7 +7,9 @@ export const metadata = {
 } satisfies Metadata;
 
 export default function HomePage() {
-  return (<Suspense>
-    <SearchComponent />
-  </Suspense>)
+  return (
+    <Suspense>
+      <SearchComponent />
+    </Suspense>
+  );
 }

@@ -11,7 +11,8 @@
   "packageManager": "pnpm@9.0.6+sha256.0624e30eff866cdeb363b15061bdb7fd9425b17bc1bb42c22f5f4efdea21f6b3",
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/*",
+    "tooling/*"
   ],
   "scripts": {
     "changeset": "changeset",
@@ -42,7 +43,7 @@
     "build:ui": "turbo build --filter=\\@dd/ui",
     "build:utils": "turbo build --filter=\\@dd/utils",
     "build:web": "turbo build --filter=\\@dd/web",
-    "clean:house": "cd apps/web && rm -rf node_modules .turbo .next && cd ../../packages/eslint-config && rm -rf node_modules && cd ../prettier && rm -rf node_modules && cd ../.. && rm -rf node_modules pnpm-lock.yaml && pnpm install && pnpm build:targeted",
+    "clean:house": "cd apps/web && rm -rf node_modules .turbo .next && cd ../../tooling/eslint && rm -rf node_modules && cd ../prettier && rm -rf node_modules && cd ../.. && rm -rf node_modules pnpm-lock.yaml && pnpm install && pnpm build:targeted",
     "condense:privatekey": "awk -v ORS='\\n' '1' private.pem",
     "condense:publickey": "awk -v ORS='\\n' '1' public.pem",
     "generate:privatekey": "openssl genrsa -out private.pem 2048",
@@ -74,12 +75,13 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
-    "@dd/prettier": "workspace:*",
+    "@dd/prettier-config": "workspace:*",
     "@total-typescript/ts-reset": "^0.5.1",
     "@types/node": "^20.12.7",
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.1",
     "dotenv-expand": "^11.0.6",
+    "eslint":"^9.1.1",
     "husky": "^9.0.11",
     "prettier": "^3.2.5",
     "stylelint": "^16.4.0",
@@ -89,6 +91,11 @@
     "typescript": "^5.4.5",
     "vercel": "latest"
   },
-  "prettier": "@dd/prettier",
-  "keywords": []
+  "prettier": "@dd/prettier-config",
+  "keywords": [],
+  "engines": {
+    "node": ">=20",
+    "npm": ">=10",
+    "pnpm": ">=9"
+  }
 }

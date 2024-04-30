@@ -1,5 +1,5 @@
 {
-  "name": "@dd/prettier",
+  "name": "@dd/prettier-config",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -20,5 +20,5 @@
     "@dd/tsconfig": "workspace:*",
     "typescript": "^5.4.5"
   },
-  "prettier": "@dd/prettier"
+  "prettier": "@dd/prettier-config"
 }

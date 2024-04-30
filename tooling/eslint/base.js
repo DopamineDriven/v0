@@ -3,7 +3,8 @@
 import eslint from "@eslint/js";
 import importPlugin from "eslint-plugin-import";
 import tseslint from "typescript-eslint";
-
+import {relative} from "node:path";
+const project = relative(process.cwd(), "tsconfig.json");
 /**
  * All packages that leverage t3-env should use this rule
  */
@@ -37,10 +38,10 @@ export default tseslint.config(
     ignores: ["**/*.config.js"]
   },
   {
-    files: ["**/*.js", "**/*.ts", "**/*.tsx"],
+    files: ["**/*.js", "**/*.mjs", "**/*.ts", "**/*.tsx"],
     plugins: {
       import: importPlugin
-    },
+    },ignores: ["**/*.config.mjs", "**/*.config.js", "**/*.config.cjs"],
     extends: [
       eslint.configs.recommended,
       ...tseslint.configs.recommended,
@@ -72,6 +73,6 @@ export default tseslint.config(
   },
   {
     linterOptions: { reportUnusedDisableDirectives: true },
-    languageOptions: { parserOptions: { project: true } }
+    languageOptions: { parserOptions: { project: project } }
   }
 );

@@ -1,4 +1,4 @@
-import baseConfig from "@dd/eslint-config";
+import baseConfig from "@dd/eslint-config/base";
 import nextjsConfig from "@dd/eslint-config/next";
 import reactConfig from "@dd/eslint-config/react";
 
@@ -6,7 +6,9 @@ import reactConfig from "@dd/eslint-config/react";
 export default [
   {
     ignores: [".next/**"],
+    files: ["**/*.{ts,js,jsx,tsx}"]
   },
+
   ...baseConfig,
   ...reactConfig,
   ...nextjsConfig

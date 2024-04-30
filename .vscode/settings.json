@@ -10,9 +10,11 @@
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
   "eslint.experimental.useFlatConfig": true,
+  "eslint.enable": true,
   "eslint.workingDirectories": [
     { "pattern": "apps/*/" },
-    { "pattern": "packages/*/" }
+    { "pattern": "packages/*/" },
+    { "pattern": "tooling/*/" }
   ],
   "C_Cpp.dimInactiveRegions": false,
   "yaml.validate": true,

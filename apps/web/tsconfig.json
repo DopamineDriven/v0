@@ -7,7 +7,7 @@
       "dom.iterable"
     ],
     "jsx": "preserve",
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
       "@/*": [
         "./src/*"
@@ -24,9 +24,18 @@
   },
   "include": [
     ".",
+    "eslint.config.js",
+    "index.d.ts",
+    "next-env.d.ts",
+    "next.config.mjs",
+    "postcss.config.cjs",
+    "tailwind.config.ts",
+    "src/**/*.tsx",
+    "src/**/*.ts",
     ".next/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "public/**/*.js"
   ]
 }

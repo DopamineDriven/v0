@@ -1,5 +1,3 @@
-/// <reference types="./types.d.ts" />
-
 import reactPlugin from "eslint-plugin-react";
 import hooksPlugin from "eslint-plugin-react-hooks";
 

@@ -1,6 +1,7 @@
 /**
- * Since the ecosystem hasn't fully migrated to ESLint's new FlatConfig system yet,
- * we "need" to type some of the plugins manually :(
+ * Most packages haven't fully migrated to the new
+ * FlatConfig system yet (eslint >=v9); typing plugins
+ * manually is a temporary albeit necessary workaround
  */
 
 declare module "@eslint/js" {
