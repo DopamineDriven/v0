@@ -1,5 +1,5 @@
 /**@type {import("eslint/index").ESLint.ConfigData} */
-module.exports = {
+export default {
   extends: ["eslint:recommended", "prettier", "turbo"],
   env: {
     node: true,

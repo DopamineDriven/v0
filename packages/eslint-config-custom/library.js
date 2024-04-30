@@ -10,15 +10,16 @@ module.exports = {
     React: true,
     JSX: true,
   },
+  parserOptions: { sourceType: "module", ecmaVersion: 2023 },
   env: {
-    node: true,
+    ['es2023']: true,
   },
   settings: {
     "import/resolver": {
       typescript: {
-        project,
-      },
-    },
+        project
+      }
+    }
   },
   ignorePatterns: [
     // Ignore dotfiles

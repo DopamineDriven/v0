@@ -1,10 +1,10 @@
-const { resolve } = require("node:path");
+import { resolve } from "node:path";
 
 // https://github.com/vercel/turbo/blob/04-05-feat_turborepo_support_inputs_for_file_hash_watching/examples/with-tailwind/packages/config-eslint/next.js
 
 const project = resolve(process.cwd(), "tsconfig.json");
-/**@type {import("eslint/index").Linter.Config} */
-module.exports = {
+/**@type {import("eslint").Linter.Config} */
+export default {
   extends: [
     "@vercel/style-guide/eslint/node",
     "@vercel/style-guide/eslint/typescript",
@@ -12,7 +12,12 @@ module.exports = {
     "@vercel/style-guide/eslint/react",
     "@vercel/style-guide/eslint/next",
     "eslint-config-turbo"
-  ].map(require.resolve),
+  ].map(val => require.resolve(val)),
+  overrides: [
+    {
+      files: ["*.js?(x)", "*.mjs", "*.cjs"]
+    }
+  ],
   rules: {
     "@typescript-eslint/no-for-in-array": "off",
     "no-var": "off",
@@ -126,13 +131,6 @@ module.exports = {
     "unicorn/prefer-node-protocol": "off"
   },
   plugins: ["only-warn"],
-  globals: {
-    React: true,
-    JSX: true
-  },
-  env: {
-    node: true
-  },
   settings: {
     "import/resolver": {
       typescript: {
@@ -140,11 +138,15 @@ module.exports = {
       }
     }
   },
-
-  ignorePatterns: [".*.js", "node_modules/", "dist/", ".eslintrc.js", "!**/*"],
+  env: {
+    node: true,
+    es6: true
+  },
+  globals: { React: true, JSX: true },
+  ignorePatterns: [".*.js", "node_modules/", "dist/"],
   parserOptions: {
     sourceType: "module",
-    ecmaVersion: "latest",
+    ecmaVersion: 2023,
     project: [project, "../../tsconfig.json"]
   }
 };

@@ -1,16 +1,17 @@
 {
   "name": "@dd/eslint-config",
   "version": "1.0.0",
-  "private": true,
-  "files": [
-    "express.js",
-    "next.js",
-    "library.js",
-    "index.js"
-  ],
+  "exports": {
+    ".": "./index.js",
+    "./next": "./next.js",
+    "./library": "./library.js",
+    "./express": "./express.js"
+  },
   "license": "MIT",
   "devDependencies": {
+    "@dd/tsconfig": "workspace:*",
     "@next/eslint-plugin-next": "latest",
+    "@types/node": "^20.12.7",
     "@typescript-eslint/eslint-plugin": "^7.8.0",
     "@typescript-eslint/parser": "^7.8.0",
     "@vercel/style-guide": "^6.0.0",
