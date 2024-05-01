@@ -22,7 +22,8 @@
     "@dd/prettier-config": "workspace:*",
     "@dd/tsconfig": "workspace:*",
     "eslint": "^9.1.1",
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5"
   },
   "prettier": "@dd/prettier-config"
 }

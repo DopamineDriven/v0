@@ -1,6 +1,6 @@
+import type React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import type React from "react";
 
 export type Unenumerate<T> = T extends readonly (infer U)[] | (infer U)[]
   ? U
@@ -16,26 +16,22 @@ export type InferReactForwardRefExoticComponentProps<T> =
   T extends React.ForwardRefExoticComponent<infer U> ? U : T;
 
 // Next Link Props
+export type LinkPropsReinferred = InferIt<typeof Link, "P">["0"];
 
-export type LinkPropsInferred = {
-  [P in keyof InferReactForwardRefExoticComponentProps<
-    typeof Link
-  >]: InferReactForwardRefExoticComponentProps<typeof Link>[P];
+export type LinkPropsTargeted<T extends keyof LinkPropsReinferred> = {
+  [P in T]: LinkPropsReinferred[P];
 };
 
-export type LinkPropsTargeted<T extends keyof LinkPropsInferred> = {
-  [P in T]: LinkPropsInferred[P];
-};
+export type LinkPropsExclude<T extends keyof LinkPropsReinferred> =
+  RemoveFields<LinkPropsTargeted<keyof LinkPropsReinferred>, T>;
 
-export type LinkPropsExclude<T extends keyof LinkPropsInferred> = RemoveFields<
-  LinkPropsTargeted<keyof LinkPropsInferred>,
-  T
->;
+export type LinkPropsInclude<T extends keyof LinkPropsReinferred> =
+  RemoveFields<
+    LinkPropsTargeted<keyof LinkPropsReinferred>,
+    Exclude<keyof LinkPropsReinferred, T>
+  >;
 
-export type LinkPropsInclude<T extends keyof LinkPropsInferred> = RemoveFields<
-  LinkPropsTargeted<keyof LinkPropsInferred>,
-  Exclude<keyof LinkPropsInferred, T>
->;
+export const testertester = (props: LinkPropsReinferred) => props;
 
 // Next Image Props
 
@@ -113,11 +109,11 @@ export function whAdjust<O extends string, T extends number>(
 }
 
 export function omitFields<
-  Target extends { [record: string | symbol | number]: unknown },
-  Key extends (keyof Target)[]
+  const Target extends { [record: string | symbol | number]: unknown },
+  const Key extends (keyof Target)[]
 >(target: Target, ...keys: Key[]): Omit<Target, Unenumerate<Key>> {
-  for (const key in keys) {
-    delete target[key];
+  for (const key of keys) {
+    delete target[key as Unenumerate<Key>];
   }
   return target;
 }
@@ -177,50 +173,30 @@ export type InferGenerateStaticParamsReturnType<
  * B->readonly [P, RT] (Both)
  */
 
-export type InferIt<T, V extends "RT" | "P" | "B"> = Unenumerate<
-  T extends (
-    ...args: infer P
-  ) =>
-    | infer RT
-    | Unenumerate<infer RT>
-    | Promise<infer RT>
-    | Unenumerate<Promise<infer RT>>
-    | Promise<Unenumerate<infer RT>>
-    ? V extends "B"
-      ? { readonly params: P; readonly returnType: RT }
-      : V extends "RT"
-        ? RT
-        : V extends "P"
-          ? P
-          : T
-    : T
->;
+export type InferIt<T, V extends "RT" | "P" | "B"> = T extends (
+  ...args: infer P
+) => | infer RT
+     | Promise<infer RT>
+     | PromiseLike<infer RT>
+     | Awaited<infer RT>
+  ? V extends "B"
+    ? { readonly params: P; readonly returnType: RT }
+    : V extends "RT"
+      ? RT
+      : V extends "P"
+        ? P
+        : T
+  : T;
+
+// export const myfunction = async (_props: {tr?: boolean; vr?: boolean;}) => {
+//   return await Promise.all([(() => ["1", "2", "3"] as const)()]).then(([val]) => val)
+// };
+// export type TestingMyFunction = InferIt<typeof myfunction, "B">;
 
 export type InferGenerateStaticParamsRT<V extends (...args: any) => any> = {
   params: InferIt<V, "RT">;
 };
 
-type TestProps = {
-  d: typeof Date;
-  v: boolean;
-  c: {
-    nested: number;
-    object: string[];
-  };
-};
-
-const testing = (props: TestProps) => {
-  const returnString =
-    `${props.v} ${props.c.nested} ${new Date(props.d.now())}` as const;
-  props.c.object.push(returnString);
-  return returnString;
-};
-
-const getIt = (props: InferIt<typeof testing, "P">) => props;
-const getItt = (props: InferIt<typeof testing, "RT">) => props;
-
-const getIttt = ({ params, returnType }: InferIt<typeof testing, "B">) =>
-  returnType;
 export type InferTsxTargetedFlexi<T> =
   T extends React.DetailedHTMLProps<infer U, infer E> ? readonly [U, E] : T;
 

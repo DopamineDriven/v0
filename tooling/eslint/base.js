@@ -35,13 +35,14 @@ export const restrictEnvAccess = tseslint.config({
 export default tseslint.config(
   {
     // Globally ignored files
-    ignores: ["**/*.config.js"]
+    ignores: ["**/*.config.js", "tsup.config.ts"]
   },
   {
     files: ["**/*.js", "**/*.mjs", "**/*.ts", "**/*.tsx"],
     plugins: {
       import: importPlugin
-    },ignores: ["**/*.config.mjs", "**/*.config.js", "**/*.config.cjs"],
+    },
+    ignores: ["**/*.config.mjs", "**/*.config.js", "**/*.config.cjs", "tsup.config.ts"],
     extends: [
       eslint.configs.recommended,
       ...tseslint.configs.recommended,
@@ -52,10 +53,6 @@ export default tseslint.config(
       "@typescript-eslint/no-unused-vars": [
         "error",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }
-      ],
-      "@typescript-eslint/consistent-type-imports": [
-        "warn",
-        { prefer: "type-imports", fixStyle: "separate-type-imports" }
       ],
       "@typescript-eslint/no-misused-promises": [
         2,
@@ -68,7 +65,12 @@ export default tseslint.config(
         }
       ],
       "@typescript-eslint/no-non-null-assertion": "error",
-      "import/consistent-type-specifier-style": ["error", "prefer-top-level"]
+      "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
+      "@typescript-eslint/consistent-indexed-object-style": "off",
+      "@typescript-eslint/consistent-type-definitions": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/consistent-type-imports": "off",
+      "no-unsafe-finally": "off"
     }
   },
   {

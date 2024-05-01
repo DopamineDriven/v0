@@ -24,7 +24,7 @@
   },
   "include": [
     ".",
-    "eslint.config.js",
+    "eslint.config.mjs",
     "index.d.ts",
     "next-env.d.ts",
     "next.config.mjs",
