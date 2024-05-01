@@ -1,0 +1,100 @@
+{
+  "name": "@dd/codemod",
+  "version": "1.0.4",
+  "files": [
+    "dist/**/*.{js,cjs,mjs,ts,cts,mts}"
+  ],
+
+  "license": "MIT",
+  "sideEffects": true,
+  "type": "module",
+  "description": "codemods to combat boring repetitive tasks",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/*.d.ts",
+        "dist/*/index.d.ts",
+        "dist/*.d.cts"
+      ],
+      "bin": [
+        "dist/bin/init.d.ts"
+      ],
+      "config": [
+        "dist/config/index.d.ts"
+      ],
+      "services": [
+        "dist/services/codemod/index.d.ts"
+      ],
+      "types": [
+        "dist/types/index.d.ts"
+      ]
+    }
+  },
+  "bin": {
+    "ddcodemod": "dist/bin/init.js"
+  },
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*.js",
+    "./bin": "./dist/bin/init.js"
+  },
+  "scripts": {
+    "lint": "eslint",
+    "dev": "pnpm build",
+    "prebuild": "rm -rf dist",
+    "build": "tsup",
+    "postbuild": "chmod a+x ./dist/bin/init.js && chmod a+x ./dist/bin/init.cjs",
+    "clean": "rm -rf .turbo node_modules dist",
+    "publish": "npm publish --no-git-checks",
+    "fix": "npm pkg fix",
+    "tree": "rm -rf dist && tree -n -I **node_modules** -H . -T ddcodemod -o tree.html"
+  },
+  "peerDependencies": {
+    "next": ">=14",
+    "react": ">=18.2",
+    "react-dom": ">=18.2"
+  },
+  "peerDependenciesMeta": {
+    "next": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "dotenv": "^16.4.5",
+    "gradient-string": "^2.0.2"
+  },
+  "devDependencies": {
+    "@dd/eslint-config": "workspace:*",
+    "@dd/prettier-config": "workspace:*",
+    "@dd/tsconfig": "workspace:*",
+    "@microsoft/api-extractor": "^7.43.1",
+    "@swc/core": "^1.4.17",
+    "@types/gradient-string": "^1.1.6",
+    "@types/node": "^20.12.7",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
+    "chokidar": "^3.6.0",
+    "dotenv": "^16.4.5",
+    "dotenv-cli": "^7.4.1",
+    "dotenv-expand": "^11.0.6",
+    "eslint": "^9.1.1",
+    "next": "^14.2.3",
+    "prettier": "^3.2.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "terser": "^5.31.0",
+    "tslib": "^2.6.2",
+    "tsup": "^8.0.2",
+    "tsx": "^4.8.1",
+    "typescript": "^5.4.5"
+  },
+  "prettier": "@dd/prettier-config"
+}

@@ -13,12 +13,12 @@
     "incremental": true,
     "disableSourceOfProjectReferenceRedirect": true,
     "strict": true,
+    "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
     "checkJs": true,
     "module": "Preserve",
     "moduleResolution": "Bundler",
     "noEmit": true
   },
-  "include": ["."],
   "exclude": ["node_modules", "build", "dist", ".next/cache"]
 }
