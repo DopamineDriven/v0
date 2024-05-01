@@ -8,7 +8,9 @@
   "css.format.enable": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }, {"rule": "@typescript-eslint/consistent-indexed-object-style", "severity": "off"}, {"rule": "@typescript-eslint/consistent-type-definitions", "severity": "off"}, {"rule": "@typescript-eslint/no-explicit-any", "severity": "off"}, {"rule": "@typescript-eslint/consistent-type-imports", "severity": "off"}],
+  "eslint.rules.customizations": [
+    { "rule": "*", "severity": "warn" }
+  ],
   "eslint.experimental.useFlatConfig": true,
   "eslint.enable": true,
   "eslint.workingDirectories": [

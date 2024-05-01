@@ -5,7 +5,6 @@
  */
 
 declare module "@eslint/js" {
-  // Why the hell doesn't eslint themselves export their types?
   import type { Linter } from "eslint";
 
   export const configs: {

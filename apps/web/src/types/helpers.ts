@@ -16,13 +16,6 @@ export type InferReactForwardRefExoticComponentProps<T> =
   T extends React.ForwardRefExoticComponent<infer U> ? U : T;
 
 // Next Link Props
-
-export type LinkPropsInferred = {
-  [P in keyof InferReactForwardRefExoticComponentProps<
-    typeof Link
-  >]: InferReactForwardRefExoticComponentProps<typeof Link>[P];
-};
-
 export type LinkPropsReinferred = InferIt<typeof Link, "P">["0"];
 
 export type LinkPropsTargeted<T extends keyof LinkPropsReinferred> = {
