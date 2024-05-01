@@ -6,12 +6,13 @@
   "css.format.newlineBetweenSelectors": true,
   "css.hover.references": true,
   "css.format.enable": true,
-  "typescript.tsdk": "./node_modules/typescript/lib",
+  "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
   "eslint.experimental.useFlatConfig": true,
   "eslint.enable": true,
   "eslint.workingDirectories": [
+    { "mode": "auto" },
     { "pattern": "apps/*/" },
     { "pattern": "packages/*/" },
     { "pattern": "tooling/*/" }
@@ -46,7 +47,6 @@
   "editor.suggest.showStatusBar": true,
   "typescript.locale": "en",
   "typescript.referencesCodeLens.enabled": true,
-  "typescript.experimental.tsserver.web.typeAcquisition.enabled": true,
   "typescript.implementationsCodeLens.enabled": true,
   "javascript.referencesCodeLens.showOnAllFunctions": true,
   "typescript.implementationsCodeLens.showOnInterfaceMethods": true,
