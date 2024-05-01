@@ -39,7 +39,7 @@ const myVariants = {
     variant: "default",
     size: "default"
   } as const
-};
+} as const;
 
 const buttonVariants = cva(buttonStyles.className, myVariants);
 

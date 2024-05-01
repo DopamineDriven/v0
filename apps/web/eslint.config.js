@@ -5,8 +5,7 @@ import reactConfig from "@dd/eslint-config/react";
 /** @type {import('typescript-eslint').Config} */
 export default [
   {
-    ignores: [".next/**"],
-    files: ["**/*.{ts,js,jsx,tsx}"]
+    ignores: [".next/**"]
   },
 
   ...baseConfig,

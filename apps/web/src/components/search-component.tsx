@@ -23,6 +23,7 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
+import type { TsxExcludeExp } from "@/types/helpers";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -34,7 +35,6 @@ import {
   DialogTrigger
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import type { TsxExcludeExp } from "@/types/helpers";
 
 export function SearchComponent() {
   return (
@@ -53,7 +53,7 @@ export function SearchComponent() {
           <div className='relative'>
             <SearchIcon className='absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500 dark:text-gray-400' />
             <Input
-              className='w-full placeholder-gray-500 appearance-none rounded-md bg-white pl-10 shadow-none dark:bg-gray-950'
+              className='w-full appearance-none rounded-md bg-white pl-10 placeholder-gray-500 shadow-none dark:bg-gray-950'
               placeholder='Search for products...'
               type='search'
             />
