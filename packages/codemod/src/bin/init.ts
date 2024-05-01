@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 import { renderTitle } from "../consts/index.js";
 import { CodemodService } from "../services/codemod/index.js";
 
@@ -12,7 +11,6 @@ export async function runCodemodClientFlags<
   const handler = new CodemodService(process.cwd(), argv);
   /* eslint-disable-next-line @typescript-eslint/require-await */
   async function handleArgs() {
-    
     try {
       /* eslint-disable-next-line @typescript-eslint/no-floating-promises */
       handler.exe(withLogFIle);
@@ -26,7 +24,6 @@ export async function runCodemodClientFlags<
 export function helpFlag<const Argv extends string[]>(argv: Argv) {
   const handler = new CodemodService(process.cwd(), argv);
   console.log(`
-
     Usage: ${handler.handleScriptsByPkgManager(handler.getUserPkgManager(), "ddcodemod <codemod> <path> <OUTPUT_OPTIONS>")}
 
     Output options:
@@ -43,23 +40,16 @@ export function helpFlag<const Argv extends string[]>(argv: Argv) {
 
 
     Example:                ${handler.handleScriptsByPkgManager(handler.getUserPkgManager(), "ddcodemod react18 src --logs")}
-
   `);
 }
 
+/* eslint-disable @typescript-eslint/no-floating-promises */
 if (process.argv[2] === "react18") {
-  if (
-    process.argv[4] === "--logs"
-  ) {
-    /* eslint-disable-next-line @typescript-eslint/no-floating-promises */
-     Promise.all([runCodemodClientFlags(process.argv, true)]);
-  }
-  // prettier-ignore
-  /* eslint-disable-next-line @typescript-eslint/no-floating-promises */
-  else Promise.all([runCodemodClientFlags(process.argv, false)]);
+  if (process.argv[4] === "--logs") {
+    Promise.all([runCodemodClientFlags(process.argv, true)]);
+  } else Promise.all([runCodemodClientFlags(process.argv, false)]);
 }
 
 if (process.argv[2] === "--help" || process.argv[2] === "-h") {
-  /* eslint-disable-next-line @typescript-eslint/no-floating-promises */
   Promise.all([helpFlag(process.argv)]);
 }
