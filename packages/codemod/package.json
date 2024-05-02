@@ -1,6 +1,6 @@
 {
   "name": "@dd/codemod",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "files": [
     "dist/**/*.{js,cjs,mjs,ts,cts,mts}"
   ],
@@ -47,7 +47,7 @@
     "dev": "pnpm build",
     "prebuild": "rm -rf dist",
     "build": "tsup",
-    "postbuild": "chmod a+x ./dist/bin/init.js && chmod a+x ./dist/bin/init.cjs",
+    "postbuilds": "chmod a+x ./dist/bin/init.js && chmod a+x ./dist/bin/init.cjs",
     "clean": "rm -rf .turbo node_modules dist",
     "publish": "npm publish --no-git-checks",
     "fix": "npm pkg fix",

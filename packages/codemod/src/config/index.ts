@@ -142,7 +142,6 @@ export class ConfigHandler {
       const toString = String(error);
       console.error(toString);
     } finally {
-      /* eslint-disable-next-line no-unsafe-finally */
       return fsSync
         .createWriteStream(relative(this.cwd, path), { autoClose: true })
         .write(Buffer.from(Buffer.from(data).toJSON().data));
