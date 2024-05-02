@@ -60,7 +60,6 @@ export class CodemodService extends ConfigHandler {
     } catch (err) {
       throw new Error(JSON.stringify(err, null, 2));
     } finally {
-      /* eslint-disable-next-line no-unsafe-finally */
       return { arrMatch, arrNoMatch };
     }
   }
