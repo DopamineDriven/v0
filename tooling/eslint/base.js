@@ -35,14 +35,14 @@ export const restrictEnvAccess = tseslint.config({
 export default tseslint.config(
   {
     // Globally ignored files
-    ignores: ["**/*.config.js", "tsup.config.ts"]
+    ignores: ["**/*.config.js", "**/*.config.mjs", "**/*.config.cjs", "**/*.config.ts"]
   },
   {
-    files: ["**/*.js", "**/*.mjs", "**/*.ts", "**/*.tsx"],
+    files: ["**/*.js", "**/*.mjs", "**/*.cjs", "**/*.ts", "**/*.tsx"],
     plugins: {
       import: importPlugin
     },
-    ignores: ["**/*.config.mjs", "**/*.config.js", "**/*.config.cjs", "tsup.config.ts"],
+    ignores: ["**/*.config.mjs", "**/*.config.js", "**/*.config.cjs", "**/*.config.ts"],
     extends: [
       eslint.configs.recommended,
       ...tseslint.configs.recommended,
