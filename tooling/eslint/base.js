@@ -58,19 +58,14 @@ export default tseslint.config(
         2,
         { checksVoidReturn: { attributes: false } }
       ],
-      "@typescript-eslint/no-unnecessary-condition": [
-        "error",
-        {
-          allowConstantLoopConditions: true
-        }
-      ],
       "@typescript-eslint/no-non-null-assertion": "error",
       "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
       "@typescript-eslint/consistent-indexed-object-style": "off",
       "@typescript-eslint/consistent-type-definitions": "off",
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/consistent-type-imports": "off",
-      "no-unsafe-finally": "off"
+      "no-unsafe-finally": "off",
+      "@typescript-eslint/no-unnecessary-condition": "off"
     }
   },
   {

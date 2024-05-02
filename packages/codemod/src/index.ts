@@ -22,6 +22,7 @@ export type {
   IOType,
   InferTsxTargeted,
   MkDirOptions,
+  OutputLogsShape,
   MkDirSyncProps,
   Mode,
   ObjEncodingOptions,

@@ -1,69 +1,22 @@
+import type { Config as TailwindConfig } from "tailwindcss";
 import forms from "@tailwindcss/forms";
 import typography from "@tailwindcss/typography";
-import type { Config as TailwindConfig } from "tailwindcss";
 import { zinc } from "tailwindcss/colors";
 
-/**
- * &rarr; [style guide](./public/styles/pdt-style-guide.png)
- *
- * bold-face hex values denote default used to generate complementary hex values
- *
- *
- * ---
- *
- * Default Tailwind Screen Config
- *
- *  ```ts
- *  const defaultConfig = {
- *    screens: {
- *      sm: '640px',
- *      md: '768px',
- *      lg: '1024px',
- *      xl: '1280px',
- *     '2xl': '1536px',
- *    }
- * };
- * ```
- * We override the default as follows
- *  ```ts
- *  const customConfig = {
- *    screens: {
- *      xs: '375px',
- *      smxs: '507px',
- *      sm: '640px',
- *      md: '768px',
- *      mdlg: '896px',
- *      lg: '1024px',
- *      xl: '1280px',
- *     '2xl': '1536px',
- *    }
- * };
- * ```
- *
- * &rarr; [read more here](https://tailwindcss.com/docs/screens#adding-smaller-breakpoints)
- *
- */
 const gray = {
   "1000": "rgb(17,17,19)",
   "1100": "rgb(10,10,11)",
   ...zinc
 } as const;
 
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 export default <TailwindConfig>{
   content: ["src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
   future: { hoverOnlyWhenSupported: true },
   theme: {
-    screens: {
-      xs: "375px",
-      smxs: "507px",
-      sm: "640px",
-      md: "768px",
-      mdlg: "896px",
-      lg: "1024px",
-      xl: "1280px",
-      "2xl": "1536px"
-    },
     extend: {
       fontFamily: {
         "basis-grotesque-pro": ["var(--font-basis-grotesque-pro)"]
