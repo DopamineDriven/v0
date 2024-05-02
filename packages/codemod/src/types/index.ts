@@ -267,3 +267,10 @@ export interface ExecuteCommandProps<T extends string>
   extends ExecSyncOptionsWithBufferEncoding {
   command: T;
 }
+
+export type OutputLogsShape = {
+  detected: string[];
+  counts: {
+    [record: string]: number;
+  };
+};
