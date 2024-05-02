@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { BasisGrotesquePro } from "@/styles/fonts";
+
+import "@dd/ui/index.css";
 import "./index.css";
 
 export const viewport = {

@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/*
+    Chrome has a bug with transitions on load since 2012!
+
+    To prevent a "pop" of content, you have to disable all transitions until
+    the page is done loading.
+
+    https://lab.laukstein.com/bug/input
+    https://twitter.com/timer150/status/1345217126680899584
+  */
+body.loading * {
+  transition: none !important;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/*
+    WCAG criteria indicates that a line-height of >=1.5 must be used
+    for the site to be considered accessible for people with dyslexia
+
+    note: can replace the calculated value with a static 1.5
+  */
+body {
+  line-height: calc(1em + 0.5rem);
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*
+    sensible media defaults
+  */
+img,
+picture,
+video,
+canvas,
+svg,
+pre {
+  display: block;
+  max-width: 100%;
+}
+
+/*
+    inherit fonts for form controls
+  */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.tooltip {
+  @apply ddui-invisible ddui-absolute ddui-transform-gpu ddui-transition-transform ddui-ease-in-out;
+}
+
+.has-tooltip {
+  @apply ddui-visible ddui-z-50 ddui-my-auto ddui--mt-1.5 ddui-border-collapse ddui-translate-x-3
+  ddui-bg-opacity-75 ddui-px-1.5 ddui-py-2 ddui-text-xxs ddui-font-medium ddui-text-current;
+}
+
+.skeleton {
+  @media (prefers-reduced-motion: no-preference) {
+    @apply ddui-block ddui-w-full ddui-animate-[loading_10s_ease-in-out_infinite] ddui-bg-[linear-gradient(calc(-270deg),rgb(249,250,251),#f0f1f2,#f0f1f2,rgba(136,19,55,0.25))] ddui-bg-[length:400%_100%] motion-reduce:hover:ddui-animate-[shimmer_1s_cubic-bezier(0,0,0.2,1)_infinite];
+  }
+}

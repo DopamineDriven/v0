@@ -1,46 +1,35 @@
 {
-  "name": "@dd/codemod",
-  "version": "1.0.5",
+  "name": "@dd/ui",
+  "version": "1.0.0",
   "files": [
-    "dist/**/*.{js,cjs,mjs,ts,cts,mts}"
+    "dist/**/*.{js,cjs,d.ts,d.cts,css}"
   ],
-
   "license": "MIT",
   "sideEffects": true,
   "type": "module",
-  "description": "codemods to combat boring repetitive tasks",
   "typesVersions": {
     "*": {
       "*": [
         "dist/*.d.ts",
-        "dist/*/index.d.ts",
-        "dist/*.d.cts"
+        "dist/*.d.cts",
+        "dist/*/index.d.ts"
       ],
-      "bin": [
-        "dist/bin/init.d.ts"
-      ],
-      "config": [
-        "dist/config/index.d.ts"
-      ],
-      "services": [
-        "dist/services/codemod/index.d.ts"
-      ],
-      "types": [
-        "dist/types/index.d.ts"
+      "tailwind": [
+        "dist/tailwind.d.cts"
       ]
     }
   },
-  "bin": {
-    "ddcodemod": "dist/bin/init.js"
-  },
-  "source": "src/index.ts",
-  "main": "./dist/index.cjs",
+  "source": "src/index.tsx",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js",
     "./*": "./dist/*.js",
-    "./bin": "./dist/bin/init.js"
+    "./tailwind": {
+      "require": "./dist/tailwind.cjs"
+    },
+    "./index.css": "./dist/index.css",
+    "./globals.css": "./dist/globals.css"
   },
   "scripts": {
     "lint": "eslint",
@@ -48,27 +37,19 @@
     "prebuild": "rm -rf dist",
     "build": "tsup",
     "clean": "rm -rf .turbo node_modules dist",
-    "publish": "npm publish --no-git-checks",
-    "fix": "npm pkg fix",
-    "tree": "rm -rf dist && tree -n -I **node_modules** -H . -T ddcodemod -o tree.html"
+    "publish": "npm publish",
+    "types": "tsc --emitDeclarationOnly",
+    "tree": "rm -rf dist && tree -n -I **node_modules** -H . -T dd-ui -o tree.html"
   },
   "peerDependencies": {
-    "next": ">=14",
+    "next": ">=14.2",
     "react": ">=18.2",
     "react-dom": ">=18.2"
   },
-  "peerDependenciesMeta": {
-    "next": {
-      "optional": true
-    },
-    "react-dom": {
-      "optional": true
-    }
-  },
   "dependencies": {
-    "chalk": "^5.3.0",
-    "dotenv": "^16.4.5",
-    "gradient-string": "^2.0.2"
+    "@swc/helpers": "^0.5.11",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {
     "@dd/eslint-config": "workspace:*",
@@ -76,19 +57,25 @@
     "@dd/tsconfig": "workspace:*",
     "@microsoft/api-extractor": "^7.43.1",
     "@swc/core": "^1.4.17",
-    "@types/gradient-string": "^1.1.6",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.13",
     "@types/node": "^20.12.8",
+    "@types/postcss-import": "^14.0.3",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.19",
     "chokidar": "^3.6.0",
-    "dotenv": "^16.4.5",
-    "dotenv-cli": "^7.4.1",
-    "dotenv-expand": "^11.0.6",
     "eslint": "^9.1.1",
     "next": "^14.2.3",
+    "postcss": "^8.4.38",
+    "postcss-focus-visible": "^9.0.1",
+    "postcss-import": "^16.1.0",
     "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.14",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.3",
+    "tailwindcss-animate": "^1.0.7",
     "terser": "^5.31.0",
     "tslib": "^2.6.2",
     "tsup": "^8.0.2",

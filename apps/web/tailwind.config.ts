@@ -9,12 +9,10 @@ const gray = {
   ...zinc
 } as const;
 
-/* eslint-disable @typescript-eslint/consistent-type-assertions */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
 export default <TailwindConfig>{
   content: ["src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
+  presets: [require("@dd/ui/tailwind")],
   future: { hoverOnlyWhenSupported: true },
   theme: {
     extend: {

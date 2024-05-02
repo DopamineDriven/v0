@@ -29,7 +29,7 @@
     "build:ui": "turbo build --filter=\\@dd/ui",
     "build:utils": "turbo build --filter=\\@dd/utils",
     "build:web": "turbo build --filter=\\@dd/web",
-    "clean:house": "cd apps/web && rm -rf node_modules .turbo .next && cd ../../tooling/eslint && rm -rf node_modules && cd ../prettier && rm -rf node_modules && cd ../../packages/codemod && rm -rf node_modules .turbo dist && cd ../.. && rm -rf node_modules pnpm-lock.yaml && pnpm install && pnpm build:targeted",
+    "clean:house": "cd apps/web && rm -rf node_modules .turbo .next && cd ../../tooling/eslint && rm -rf node_modules && cd ../prettier && rm -rf node_modules && cd ../../packages/codemod && rm -rf node_modules .turbo dist && cd ../ui && rm -rf node_modules .turbo dist && cd ../.. && rm -rf node_modules pnpm-lock.yaml && pnpm install && pnpm build:targeted",
     "condense:privatekey": "awk -v ORS='\\n' '1' private.pem",
     "condense:publickey": "awk -v ORS='\\n' '1' public.pem",
     "generate:privatekey": "openssl genrsa -out private.pem 2048",

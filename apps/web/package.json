@@ -16,6 +16,7 @@
     "codemod": "ddcodemod react 18 src --logs"
   },
   "dependencies": {
+    "@dd/ui": "workspace:*",
     "@ducanh2912/next-pwa": "^10.2.6",
     "@radix-ui/colors": "^3.0.0",
     "@radix-ui/react-dialog": "^1.0.5",

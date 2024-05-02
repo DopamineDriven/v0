@@ -35,14 +35,14 @@ export const restrictEnvAccess = tseslint.config({
 export default tseslint.config(
   {
     // Globally ignored files
-    ignores: ["**/*.config.js", "**/*.config.mjs", "**/*.config.cjs", "**/*.config.ts"]
+    ignores: ["**/*.config.js", "**/*.config.mjs", "**/*.config.cjs", "**/*.config.ts", "**/*.presets.cjs"]
   },
   {
     files: ["**/*.js", "**/*.mjs", "**/*.cjs", "**/*.ts", "**/*.tsx"],
     plugins: {
       import: importPlugin
     },
-    ignores: ["**/*.config.mjs", "**/*.config.js", "**/*.config.cjs", "**/*.config.ts"],
+    ignores: ["**/*.config.mjs", "**/*.config.js", "**/*.config.cjs", "**/*.config.ts", "**/*.presets.cjs"],
     extends: [
       eslint.configs.recommended,
       ...tseslint.configs.recommended,
@@ -58,6 +58,7 @@ export default tseslint.config(
         2,
         { checksVoidReturn: { attributes: false } }
       ],
+      "@typescript-eslint/no-unnecessary-type-assertion": "off",
       "@typescript-eslint/no-non-null-assertion": "error",
       "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
       "@typescript-eslint/consistent-indexed-object-style": "off",
