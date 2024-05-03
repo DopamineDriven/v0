@@ -1,28 +1,19 @@
 {
-  "extends": "@dd/tsconfig/base.json",
+  "extends": "@dd/tsconfig/react-library.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "alwaysStrict": true,
     "paths": {
       "@/*": ["./src/*"]
     },
-    /* EMIT RULES */
-    "jsx": "react-jsx",
-    "lib": ["DOM", "DOM.Iterable", "ESNext", "ScriptHost"],
-    "jsxImportSource": "react",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "target": "ESNext",
-    "incremental": false,
-    "sourceMap": true,
-    "useDefineForClassFields": true,
-    "disableSourceOfProjectReferenceRedirect": false,
-    "allowSyntheticDefaultImports": true,
-    "declaration": true,
-    "declarationMap": true,
-    "importHelpers": false,
-    "baseUrl": "./",
-    "noEmit": true // TSUP takes care of emitting js for us, in a MUCH faster way
+    "baseUrl": "./"
   },
-  "include": ["**/*.ts", "src/**/*.tsx", "**/*.mjs", "postcss.config.cjs", "index.d.ts", "tsup.config.ts", "next-env.d.ts", "../../reset.d.ts"]
+  "include": [
+    "**/*.ts",
+    "src/**/*.tsx",
+    "**/*.mjs",
+    "postcss.config.cjs",
+    "index.d.ts",
+    "tsup.config.ts",
+    "next-env.d.ts",
+    "../../reset.d.ts"
+  ]
 }
