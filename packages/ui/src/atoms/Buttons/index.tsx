@@ -1,7 +1,7 @@
+import type { TsxTargetedExp } from "@/types/helpers";
 import * as React from "react";
+import { cn } from "@/lib/cn";
 
-import type { TsxTargetedExp } from "../../types/helpers.js";
-import { cn } from "../../lib/cn.js";
 import LoadingDots from "../LoadingDots";
 
 /**
@@ -62,7 +62,7 @@ export type ButtonType = <C extends ButtonComponentType = "button">(
   ...args: Parameters<ButtonFC<C>>
 ) => ReturnType<ButtonFC<C>>;
 
-const variants = {
+export const variants = {
   primary:
     "ddui-text-background ddui-bg-success ddui-border-success-dark hover:ddui-bg-success/90 ddui-shadow-[0_5px_10px_rgb(0,68,255,0.12)]",
   ghost: "ddui-text-success hover:ddui-bg-[rgba(0,68,255,0.06)]",

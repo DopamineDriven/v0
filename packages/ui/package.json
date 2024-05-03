@@ -13,9 +13,6 @@
         "dist/*.d.ts",
         "dist/*.d.cts",
         "dist/*/index.d.ts"
-      ],
-      "tailwind": [
-        "dist/tailwind.d.cts"
       ]
     }
   },
@@ -25,9 +22,6 @@
   "exports": {
     ".": "./dist/index.js",
     "./*": "./dist/*.js",
-    "./tailwind": {
-      "require": "./dist/tailwind.cjs"
-    },
     "./tailwind.preset": "./dist/tailwind.preset.js",
     "./index.css": "./dist/index.css",
     "./globals.css": "./dist/globals.css"

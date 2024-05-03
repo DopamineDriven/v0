@@ -3,7 +3,7 @@ import { defineConfig, type Options } from "tsup";
 
 // prettier-ignore
 const tsupConfig = (options: Options) => ({
-  entry: ["src/**/*.ts", "src/**/*.tsx", "src/globals.css", "src/tailwind.cjs"],
+  entry: ["src/**/*.ts", "src/**/*.tsx", "src/globals.css"],
   target: ["esnext"],
   external: ["react"],
   dts: true,
