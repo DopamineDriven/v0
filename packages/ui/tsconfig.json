@@ -24,5 +24,5 @@
     "baseUrl": "./",
     "noEmit": true // TSUP takes care of emitting js for us, in a MUCH faster way
   },
-  "include": ["**/*.ts", "src/**/*.tsx", "**/*.mjs", "**/*.cjs", "index.d.ts", "**/*.js", "tsup.config.ts", "next-env.d.ts", "../../reset.d.ts"]
+  "include": ["**/*.ts", "src/**/*.tsx", "**/*.mjs", "postcss.config.cjs", "index.d.ts", "tsup.config.ts", "next-env.d.ts", "../../reset.d.ts"]
 }

@@ -13,7 +13,7 @@ export default function HomePage() {
     <Suspense>
       <SearchComponent />
       <div className='mx-auto my-auto flex h-screen min-h-full w-screen min-w-full flex-row justify-center justify-items-center'>
-        <Button Component='button' variant="secondary" size='lg'>
+        <Button Component='button' variant='secondary' size='lg'>
           SECONDARY
         </Button>
       </div>
