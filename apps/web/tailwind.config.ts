@@ -3,6 +3,8 @@ import forms from "@tailwindcss/forms";
 import typography from "@tailwindcss/typography";
 import { zinc } from "tailwindcss/colors";
 
+import uiPreset from "@dd/ui/tailwind.preset";
+
 const gray = {
   "1000": "rgb(17,17,19)",
   "1100": "rgb(10,10,11)",
@@ -12,7 +14,7 @@ const gray = {
 export default <TailwindConfig>{
   content: ["src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
-  presets: [require("@dd/ui/tailwind")],
+  presets: [uiPreset],
   future: { hoverOnlyWhenSupported: true },
   theme: {
     extend: {

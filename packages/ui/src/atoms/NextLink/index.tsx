@@ -3,6 +3,10 @@ import type { LinkPropsInferred } from "@/types/next";
 import NextLink from "next/link";
 import cn from "clsx";
 
+// type M<T> = T extends `https://${string}` ? TsxTargetedExp<"a", "attribute"> : LinkPropsInferred;
+
+// type GetHref = LinkPropsInferred['href']
+
 const DduiLink = ({
   ...props
 }: LinkPropsInferred | TsxTargetedExp<"a", "attribute">) => {

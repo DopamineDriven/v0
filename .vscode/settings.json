@@ -39,7 +39,6 @@
     "rootClassName",
     ".*Variant.*",
     "cva",
-    "variant",
     "configureVariants",
     ".*variant.*",
     ".*Styles.*" // Add ".*Styles.*" (or whatever matches your naming scheme)

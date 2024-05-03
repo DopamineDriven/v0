@@ -28,6 +28,7 @@
     "./tailwind": {
       "require": "./dist/tailwind.cjs"
     },
+    "./tailwind.preset": "./dist/tailwind.preset.js",
     "./index.css": "./dist/index.css",
     "./globals.css": "./dist/globals.css"
   },

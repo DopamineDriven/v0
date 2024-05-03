@@ -1,9 +1,10 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+import type { RemoveFields } from "@/types";
+import type { Config } from "tailwindcss";
+import { zinc } from "tailwindcss/colors";
+
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
-const { zinc } = require("tailwindcss/colors");
-
-const customColors = {
+export const customColors = {
   blue: "#2882ef",
   lightblue: "#2882ef",
   rosa: "#f02888",
@@ -106,16 +107,18 @@ const customColors = {
   "medium-grey-contrast": "var(--colorMediumGreyContrast)",
   "dark-grey": "var(--colorDarkGrey)",
   "dark-grey-contrast": "var(--colorDarkGreyContrast)"
-};
+} as const;
 
-const gray = Object.freeze({
+export const customGrays = {
   ...zinc,
   "1000": "#111113",
   "1100": "#0a0a0b"
-});
+} as const;
 
-/** @type {Partial<import("tailwindcss/types/config").Config>}  */
-module.exports = {
+// We want each package to be responsible for its own content.
+
+/* eslint-disable-next-line @typescript-eslint/consistent-type-assertions */
+export default <RemoveFields<Config, "content">>{
   theme: {
     extend: {
       colors: {
@@ -125,7 +128,7 @@ module.exports = {
           DEFAULT: customColors.success.DEFAULT,
           light: customColors.success.light
         },
-        gray,
+        gray: customGrays,
         code: customColors.rosa,
         secondary: {
           DEFAULT: customColors.accents[5],
@@ -139,6 +142,10 @@ module.exports = {
         5: "0.3125rem",
         6: "0.375rem",
         7: "0.4375rem"
+      },
+      backgroundImage: {
+        "glow-conic":
+          "conic-gradient(from 180deg at 50% 50%, #2a8af6 0deg, #a853ba 180deg, #e92a67 360deg)"
       },
       maxWidth: {
         "10xl": "150rem", // 2400px
@@ -271,5 +278,6 @@ module.exports = {
       },
       fontSize: { xxs: ["0.50rem", { lineHeight: "0.75rem" }] }
     }
-  }
+  },
+  plugins: []
 };

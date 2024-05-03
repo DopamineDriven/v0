@@ -12,9 +12,11 @@ export default function HomePage() {
   return (
     <Suspense>
       <SearchComponent />
-      <Button Component='button' variant='ghost' size='lg'>
-        GHOST
-      </Button>
+      <div className='mx-auto my-auto flex h-screen min-h-full w-screen min-w-full flex-row justify-center justify-items-center'>
+        <Button Component='button' variant="secondary" size='lg'>
+          SECONDARY
+        </Button>
+      </div>
     </Suspense>
   );
 }
