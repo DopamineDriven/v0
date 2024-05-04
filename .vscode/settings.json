@@ -8,9 +8,7 @@
   "css.format.enable": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "eslint.rules.customizations": [
-    { "rule": "*", "severity": "warn" }
-  ],
+  "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
   "eslint.experimental.useFlatConfig": true,
   "eslint.enable": true,
   "eslint.workingDirectories": [

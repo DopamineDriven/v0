@@ -1,9 +1,10 @@
 /// <reference types="./types.d.ts" />
 
+import { relative } from "node:path";
 import eslint from "@eslint/js";
 import importPlugin from "eslint-plugin-import";
 import tseslint from "typescript-eslint";
-import {relative} from "node:path";
+
 const project = relative(process.cwd(), "tsconfig.json");
 /**
  * All packages that leverage t3-env should use this rule
@@ -35,14 +36,35 @@ export const restrictEnvAccess = tseslint.config({
 export default tseslint.config(
   {
     // Globally ignored files
-    ignores: ["**/*.config.js", "**/*.config.mjs", "**/*.config.cjs", "**/*.config.ts", "**/*.presets.cjs"]
+    ignores: [
+      "**/*.config.js",
+      "**/*.config.mjs",
+      "**/*.config.cjs",
+      "**/*.config.ts",
+      "**/*.presets.cjs"
+    ]
   },
   {
-    files: ["**/*.js", "**/*.mjs", "**/*.cjs", "**/*.ts", "**/*.tsx", "**/*.jsx", "**/*.mts", "**/*.cts"],
+    files: [
+      "**/*.js",
+      "**/*.mjs",
+      "**/*.cjs",
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.jsx",
+      "**/*.mts",
+      "**/*.cts"
+    ],
     plugins: {
       import: importPlugin
     },
-    ignores: ["**/*.config.mjs", "**/*.config.js", "**/*.config.cjs", "**/*.config.ts", "**/*.presets.cjs"],
+    ignores: [
+      "**/*.config.mjs",
+      "**/*.config.js",
+      "**/*.config.cjs",
+      "**/*.config.ts",
+      "**/*.presets.cjs"
+    ],
     extends: [
       eslint.configs.recommended,
       ...tseslint.configs.recommended,

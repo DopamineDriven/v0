@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import type { NavProps } from "../Nav";
 import Nav from "../Nav";
 

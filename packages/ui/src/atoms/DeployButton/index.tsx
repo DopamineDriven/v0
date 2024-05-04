@@ -1,5 +1,5 @@
 import type React from "react";
-import {mapParams} from "../../lib/map-params";
+import { mapParams } from "../../lib/map-params";
 import Button from "../Buttons";
 
 const VERCEL_CLONE = "https://vercel.com/new/clone" as const;

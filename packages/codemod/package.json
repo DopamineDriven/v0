@@ -4,7 +4,6 @@
   "files": [
     "dist/**/*.{js,cjs,mjs,ts,cts,mts}"
   ],
-
   "license": "MIT",
   "sideEffects": true,
   "type": "module",

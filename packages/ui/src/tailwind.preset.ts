@@ -1,6 +1,6 @@
-import type { RemoveFields } from "@/types";
 import type { Config } from "tailwindcss";
 import { zinc } from "tailwindcss/colors";
+import type { RemoveFields } from "@/types";
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 

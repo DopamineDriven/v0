@@ -1,5 +1,5 @@
-import type { TsxTargetedExp } from "@/types/helpers";
 import * as React from "react";
+import type { TsxTargetedExp } from "@/types/helpers";
 
 export const loadingDotStyles = {
   dot: `ddui-rounded-full ddui-h-2 ddui-w-2 ddui-mx-0.5 ddui-bg-current motion-safe:ddui-animate-[blink_1s_ease_0s_infinite_normal_both]`

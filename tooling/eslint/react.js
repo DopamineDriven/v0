@@ -7,16 +7,16 @@ export default [
     files: ["**/*.ts", "**/*.tsx"],
     plugins: {
       react: reactPlugin,
-      "react-hooks": hooksPlugin,
+      "react-hooks": hooksPlugin
     },
     rules: {
       ...reactPlugin.configs["jsx-runtime"].rules,
-      ...hooksPlugin.configs.recommended.rules,
+      ...hooksPlugin.configs.recommended.rules
     },
     languageOptions: {
       globals: {
-        React: "writable",
-      },
-    },
-  },
+        React: "writable"
+      }
+    }
+  }
 ];

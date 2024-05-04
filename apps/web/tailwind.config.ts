@@ -1,9 +1,8 @@
 import type { Config as TailwindConfig } from "tailwindcss";
+import uiPreset from "@dd/ui/tailwind.preset";
 import forms from "@tailwindcss/forms";
 import typography from "@tailwindcss/typography";
 import { zinc } from "tailwindcss/colors";
-
-import uiPreset from "@dd/ui/tailwind.preset";
 
 const gray = {
   "1000": "rgb(17,17,19)",

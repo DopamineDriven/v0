@@ -1,6 +1,6 @@
+import * as React from "react";
 import type { TsxTargetedExp } from "@/types/helpers";
 import type { LinkPropsInferred } from "@/types/next";
-import * as React from "react";
 import { cn } from "@/lib/cn";
 
 export type TextProps = {

@@ -1,6 +1,6 @@
+import type { Config as TailwindConfig } from "tailwindcss";
 import forms from "@tailwindcss/forms";
 import typography from "@tailwindcss/typography";
-import type { Config as TailwindConfig } from "tailwindcss";
 import animate from "tailwindcss-animate";
 import { zinc } from "tailwindcss/colors";
 

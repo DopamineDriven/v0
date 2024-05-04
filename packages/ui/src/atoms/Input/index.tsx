@@ -1,5 +1,5 @@
-import type { TsxTargetedExp } from "@/types/helpers";
 import * as React from "react";
+import type { TsxTargetedExp } from "@/types/helpers";
 import { cn } from "@/lib/cn";
 
 const Input: React.FC<TsxTargetedExp<"input", "attribute">> = ({

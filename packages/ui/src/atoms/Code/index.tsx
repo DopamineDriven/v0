@@ -1,5 +1,5 @@
-import type { TsxTargeted, TsxTargetedExp } from "@/types/helpers";
 import * as React from "react";
+import type { TsxTargeted, TsxTargetedExp } from "@/types/helpers";
 import { cn } from "@/lib/cn";
 import LoadingDots from "../LoadingDots";
 

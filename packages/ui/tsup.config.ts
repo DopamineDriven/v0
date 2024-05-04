@@ -1,5 +1,6 @@
 import { relative } from "path";
-import { defineConfig, type Options } from "tsup";
+import type { Options } from "tsup";
+import { defineConfig } from "tsup";
 
 // prettier-ignore
 const tsupConfig = (options: Options) => ({

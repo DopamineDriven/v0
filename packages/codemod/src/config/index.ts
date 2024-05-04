@@ -2,7 +2,6 @@ import { execSync } from "child_process";
 import fsSync from "fs";
 import { relative } from "path";
 import * as dotenv from "dotenv";
-
 import type {
   ExecuteCommandProps,
   MkDirSyncProps,

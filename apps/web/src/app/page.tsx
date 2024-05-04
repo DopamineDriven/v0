@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
+import { Button } from "@dd/ui";
 import { Suspense } from "react";
 import { SearchComponent } from "@/components/search-component";
-
-import { Button } from "@dd/ui";
 
 export const metadata = {
   title: "Home"
