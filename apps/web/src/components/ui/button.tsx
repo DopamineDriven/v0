@@ -1,12 +1,12 @@
 "use client";
 
-import type { TsxTargetedExp } from "@/types/helpers";
 import type { VariantProps } from "class-variance-authority";
 import type { ClassProp } from "class-variance-authority/types";
 import * as React from "react";
-import { cn } from "@/lib/utils";
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
+import type { TsxTargetedExp } from "@/types/helpers";
+import { cn } from "@/lib/utils";
 
 const buttonStyles = {
   className:

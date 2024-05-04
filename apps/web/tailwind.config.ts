@@ -1,4 +1,5 @@
 import type { Config as TailwindConfig } from "tailwindcss";
+import uiPreset from "@dd/ui/tailwind.preset";
 import forms from "@tailwindcss/forms";
 import typography from "@tailwindcss/typography";
 import { zinc } from "tailwindcss/colors";
@@ -9,12 +10,10 @@ const gray = {
   ...zinc
 } as const;
 
-/* eslint-disable @typescript-eslint/consistent-type-assertions */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
 export default <TailwindConfig>{
   content: ["src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
+  presets: [uiPreset],
   future: { hoverOnlyWhenSupported: true },
   theme: {
     extend: {

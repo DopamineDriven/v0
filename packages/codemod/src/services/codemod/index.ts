@@ -8,9 +8,9 @@ export class CodemodService extends ConfigHandler {
   ) {
     super(cwd);
   }
+
   /* eslint-disable prefer-const */
   /* eslint-disable no-useless-escape */
-  /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
   /* eslint-disable @typescript-eslint/no-non-null-assertion */
   /* eslint-disable @typescript-eslint/no-floating-promises */
 
@@ -81,14 +81,14 @@ export class CodemodService extends ConfigHandler {
       .join(`\n`);
   }
 
-  public readOutputLogs() {
+  public get readOutputLogs() {
     return this.readDirRecursive(`${this.logsDir}`)
       .filter(t => /\.gitignore/g.test(t) === false)
       .filter(path => path.split(/\./g).length > 1);
   }
 
   public get extractOutputLogCounts() {
-    return this.readOutputLogs()
+    return this.readOutputLogs
       .map(
         v =>
           JSON.parse(
@@ -186,6 +186,12 @@ export class CodemodService extends ConfigHandler {
     }
   }
 
+  public get summaryPathsFormatted() {
+    return this.readOutputLogs
+      .filter(t => /summary\//g.test(t) === false)
+      .map(t => t.split(/\.json/g)?.[0]);
+  }
+
   public handleLogSummary(d: typeof Date, withLogFile: boolean) {
     const [date, time] = new Date(d.now()).toISOString().split(/T/g) as [
       string,
@@ -206,7 +212,8 @@ export class CodemodService extends ConfigHandler {
           {
             summary: {
               fileCount: this.extractOutputLogCounts.length,
-              counts: summaryCounts
+              counts: summaryCounts,
+              files: this.summaryPathsFormatted
             }
           },
           null,

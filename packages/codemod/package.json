@@ -1,10 +1,9 @@
 {
   "name": "@dd/codemod",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "files": [
     "dist/**/*.{js,cjs,mjs,ts,cts,mts}"
   ],
-
   "license": "MIT",
   "sideEffects": true,
   "type": "module",
@@ -47,7 +46,6 @@
     "dev": "pnpm build",
     "prebuild": "rm -rf dist",
     "build": "tsup",
-    "postbuilds": "chmod a+x ./dist/bin/init.js && chmod a+x ./dist/bin/init.cjs",
     "clean": "rm -rf .turbo node_modules dist",
     "publish": "npm publish --no-git-checks",
     "fix": "npm pkg fix",
@@ -85,7 +83,7 @@
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.1",
     "dotenv-expand": "^11.0.6",
-    "eslint": "^9.1.1",
+    "eslint": "^9.2.0",
     "next": "^14.2.3",
     "prettier": "^3.2.5",
     "react": "^18.3.1",
@@ -93,7 +91,7 @@
     "terser": "^5.31.0",
     "tslib": "^2.6.2",
     "tsup": "^8.0.2",
-    "tsx": "^4.8.2",
+    "tsx": "^4.9.0",
     "typescript": "^5.4.5"
   },
   "prettier": "@dd/prettier-config"

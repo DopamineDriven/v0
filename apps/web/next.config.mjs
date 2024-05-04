@@ -2,6 +2,7 @@ import withPWAInit from "@ducanh2912/next-pwa";
 
 export default withPWAInit({ dest: "public", register: true, scope: "/app" })({
   reactStrictMode: true,
+  experimental: { optimizePackageImports: ["@dd/ui"] },
   eslint: { ignoreDuringBuilds: false },
   typescript: { ignoreBuildErrors: false, tsconfigPath: "./tsconfig.json" },
   images: {

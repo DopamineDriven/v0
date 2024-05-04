@@ -1,6 +1,7 @@
 import { execSync } from "child_process";
 import fsSync from "fs";
 import { relative } from "path";
+import * as dotenv from "dotenv";
 import type {
   ExecuteCommandProps,
   MkDirSyncProps,
@@ -8,7 +9,6 @@ import type {
   SvgConfig,
   WriteStreamProps
 } from "../types/index.js";
-import * as dotenv from "dotenv";
 
 dotenv.config();
 
@@ -88,9 +88,7 @@ export class ConfigHandler {
   }
 
   public getUserPkgManager(): "yarn" | "pnpm" | "bun" | "npm" {
-    // This environment variable is set by npm and yarn but pnpm seems less consistent
     const userAgent = process.env.npm_config_user_agent;
-
     if (userAgent) {
       if (userAgent.startsWith("yarn")) {
         return "yarn";
@@ -102,7 +100,7 @@ export class ConfigHandler {
         return "npm";
       }
     } else {
-      // If no user agent is set, assume npm
+      // default to npm
       return "npm";
     }
   }
@@ -205,7 +203,6 @@ export class ConfigHandler {
                   ? text.toLowerCase()
                   : text;
         });
-        /* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */
     } else return [splitDots?.[0]] as string[];
   }
 
@@ -242,7 +239,6 @@ export class ConfigHandler {
                   : text;
         })
         .join(this.joinHelper(target));
-      /* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */
     } else return splitDashes?.[0];
   }
 

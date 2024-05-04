@@ -175,10 +175,7 @@ export type InferGenerateStaticParamsReturnType<
 
 export type InferIt<T, V extends "RT" | "P" | "B"> = T extends (
   ...args: infer P
-) => | infer RT
-     | Promise<infer RT>
-     | PromiseLike<infer RT>
-     | Awaited<infer RT>
+) => infer RT | Promise<infer RT> | PromiseLike<infer RT> | Awaited<infer RT>
   ? V extends "B"
     ? { readonly params: P; readonly returnType: RT }
     : V extends "RT"

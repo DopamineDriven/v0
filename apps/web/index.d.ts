@@ -4,8 +4,10 @@
 declare module "@edge-runtime/types";
 declare module "gtag.js";
 
-export declare global {
-  export interface Window {
+declare global {
+  interface Window {
     define?: unknown;
   }
 }
+
+export {};

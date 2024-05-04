@@ -1,0 +1,81 @@
+{
+  "name": "@dd/ui",
+  "version": "1.0.0",
+  "files": [
+    "dist/**/*.{js,cjs,d.ts,d.cts,css}"
+  ],
+  "license": "MIT",
+  "sideEffects": true,
+  "type": "module",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/*.d.ts",
+        "dist/*.d.cts",
+        "dist/*/index.d.ts"
+      ]
+    }
+  },
+  "source": "src/index.tsx",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*.js",
+    "./tailwind.preset": "./dist/tailwind.preset.js",
+    "./index.css": "./dist/index.css",
+    "./globals.css": "./dist/globals.css"
+  },
+  "scripts": {
+    "lint": "eslint",
+    "dev": "pnpm build",
+    "prebuild": "rm -rf dist",
+    "build": "tsup",
+    "clean": "rm -rf .turbo node_modules dist",
+    "publish": "npm publish",
+    "types": "tsc --emitDeclarationOnly",
+    "tree": "rm -rf dist && tree -n -I **node_modules** -H . -T dd-ui -o tree.html"
+  },
+  "peerDependencies": {
+    "next": ">=14.2",
+    "react": ">=18.2",
+    "react-dom": ">=18.2"
+  },
+  "dependencies": {
+    "@swc/helpers": "^0.5.11",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.3.0"
+  },
+  "devDependencies": {
+    "@dd/eslint-config": "workspace:*",
+    "@dd/prettier-config": "workspace:*",
+    "@dd/tsconfig": "workspace:*",
+    "@microsoft/api-extractor": "^7.43.1",
+    "@swc/core": "^1.4.17",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.13",
+    "@types/node": "^20.12.8",
+    "@types/postcss-import": "^14.0.3",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.19",
+    "chokidar": "^3.6.0",
+    "eslint": "^9.2.0",
+    "next": "^14.2.3",
+    "postcss": "^8.4.38",
+    "postcss-focus-visible": "^9.0.1",
+    "postcss-import": "^16.1.0",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.14",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.3",
+    "tailwindcss-animate": "^1.0.7",
+    "terser": "^5.31.0",
+    "tslib": "^2.6.2",
+    "tsup": "^8.0.2",
+    "tsx": "^4.9.0",
+    "typescript": "^5.4.5"
+  },
+  "prettier": "@dd/prettier-config"
+}
