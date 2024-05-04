@@ -38,7 +38,7 @@ export default tseslint.config(
     ignores: ["**/*.config.js", "**/*.config.mjs", "**/*.config.cjs", "**/*.config.ts", "**/*.presets.cjs"]
   },
   {
-    files: ["**/*.js", "**/*.mjs", "**/*.cjs", "**/*.ts", "**/*.tsx"],
+    files: ["**/*.js", "**/*.mjs", "**/*.cjs", "**/*.ts", "**/*.tsx", "**/*.jsx", "**/*.mts", "**/*.cts"],
     plugins: {
       import: importPlugin
     },
