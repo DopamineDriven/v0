@@ -40,10 +40,5 @@ t.json
 .idea
 dist
 notes.md
-
-packages/xr/src/og
-
-packages/xr/public/*
-packages/xr/package.test.json
 ascii/*
 preinstall.mjs
