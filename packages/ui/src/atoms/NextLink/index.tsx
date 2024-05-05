@@ -1,7 +1,7 @@
 import NextLink from "next/link";
-import cn from "clsx";
 import type { TsxTargetedExp } from "@/types/helpers";
 import type { LinkPropsInferred } from "@/types/next";
+import { cn } from "@/lib/cn";
 
 // type M<T> = T extends `https://${string}` ? TsxTargetedExp<"a", "attribute"> : LinkPropsInferred;
 

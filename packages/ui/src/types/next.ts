@@ -1,4 +1,4 @@
-import type { InferIt, RemoveFields } from "@/types/helpers";
+import type { InferIt, RemoveFields } from "@/types";
 
 export type LinkPropsInferred = InferIt<
   typeof import("next/link.js").default,
