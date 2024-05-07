@@ -1,6 +1,11 @@
 import type { OutputLogsShape } from "../../types/index.js";
 import { ConfigHandler } from "../../config/index.js";
 
+/* eslint-disable prefer-const */
+/* eslint-disable no-useless-escape */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+
 export class CodemodService extends ConfigHandler {
   constructor(
     public override cwd: string,
@@ -8,11 +13,6 @@ export class CodemodService extends ConfigHandler {
   ) {
     super(cwd);
   }
-
-  /* eslint-disable prefer-const */
-  /* eslint-disable no-useless-escape */
-  /* eslint-disable @typescript-eslint/no-non-null-assertion */
-  /* eslint-disable @typescript-eslint/no-floating-promises */
 
   private isFlagged<const File extends string>(file: File) {
     return /[`|'|"]+use client+[`|'|"]+[;]?/g.test(file);
@@ -45,6 +45,10 @@ export class CodemodService extends ConfigHandler {
       .map(prependSrc => `${this.source}/${prependSrc}`);
   }
 
+  public detectStyleJsx() {
+    return /(<style\s+jsx>)/g;
+  }
+
   public recursivelyReadAndSort(
     arrMatch: [string, string][] = Array.of<[string, string]>(),
     arrNoMatch: [string, string][] = Array.of<[string, string]>()
@@ -54,7 +58,7 @@ export class CodemodService extends ConfigHandler {
       this.filterForFiles().forEach(function (v) {
         const data = fileToBuff(v).toString("utf-8");
         if (
-          /\b((React\.)?(((use)+(Breadcrumb|Callback|(Clear|Current|Toggle)?Refinement(s|List)?|Configure|Connector|Context|DynamicWidgets|(Debug|Deferred)Value|(Layout|Insertion)?Effect|Form(State|Status)|GeoSearch|(Hierarchical|Numeric)?Menu|(Infinite)?Hits(PerPage)?|ImperativeHandle|InstantSearch|Memo|Optimistic|Pagination|(Search)?Params|Pathname|PoweredBy|QueryRules|Range|Reducer|Ref|ReportWebVitals|Router|SearchBox|SelectedLayoutSegment|SelectedLayoutSegments|SortBy|State|Stats|SyncExternalStore|Transition))|((create)(Context|Element|Factory|Ref|Root|Portal))|((hydrate)(Root))|((cloneElement)|(findDOMNode)|(flushSync)|(forwardRef)|(isValidElement)|(memo)|(startTransition))))\b/g.test(
+          /(<style\s+jsx>)|\b((React\.)?(((use)+(Breadcrumb|Callback|(Clear|Current|Toggle)?Refinement(s|List)?|Configure|Connector|Context|DynamicWidgets|(Debug|Deferred)Value|(Layout|Insertion)?Effect|Form(State|Status)|GeoSearch|(Hierarchical|Numeric)?Menu|(Infinite)?Hits(PerPage)?|ImperativeHandle|InstantSearch|Memo|Optimistic|Pagination|(Search)?Params|Pathname|PoweredBy|QueryRules|Range|Reducer|Ref|ReportWebVitals|Router|SearchBox|SelectedLayoutSegment|SelectedLayoutSegments|SortBy|State|Stats|SyncExternalStore|Transition))|((create)(Context|Element|Factory|Ref|Root|Portal))|((hydrate)(Root))|((cloneElement)|(findDOMNode)|(flushSync)|(forwardRef)|(isValidElement)|(memo)|(startTransition))))\b/g.test(
             data
           )
         ) {
@@ -135,7 +139,7 @@ export class CodemodService extends ConfigHandler {
       ""
     );
     const matchRegExpArr = valRemoveImports.match(
-      /\b((React\.)?(((use)+(Breadcrumb|Callback|(Clear|Current|Toggle)?Refinement(s|List)?|Configure|Connector|Context|DynamicWidgets|(Debug|Deferred)Value|(Layout|Insertion)?Effect|Form(State|Status)|GeoSearch|(Hierarchical|Numeric)?Menu|(Infinite)?Hits(PerPage)?|ImperativeHandle|InstantSearch|Memo|Optimistic|Pagination|(Search)?Params|Pathname|PoweredBy|QueryRules|Range|Reducer|Ref|ReportWebVitals|Router|SearchBox|SelectedLayoutSegment|SelectedLayoutSegments|SortBy|State|Stats|SyncExternalStore|Transition))|((create)(Context|Element|Factory|Ref|Root|Portal))|((hydrate)(Root))|((cloneElement)|(findDOMNode)|(flushSync)|(forwardRef)|(isValidElement)|(memo)|(startTransition))))\b/g
+      /(<style\s+jsx>)|\b((React\.)?(((use)+(Breadcrumb|Callback|(Clear|Current|Toggle)?Refinement(s|List)?|Configure|Connector|Context|DynamicWidgets|(Debug|Deferred)Value|(Layout|Insertion)?Effect|Form(State|Status)|GeoSearch|(Hierarchical|Numeric)?Menu|(Infinite)?Hits(PerPage)?|ImperativeHandle|InstantSearch|Memo|Optimistic|Pagination|(Search)?Params|Pathname|PoweredBy|QueryRules|Range|Reducer|Ref|ReportWebVitals|Router|SearchBox|SelectedLayoutSegment|SelectedLayoutSegments|SortBy|State|Stats|SyncExternalStore|Transition))|((create)(Context|Element|Factory|Ref|Root|Portal))|((hydrate)(Root))|((cloneElement)|(findDOMNode)|(flushSync)|(forwardRef)|(isValidElement)|(memo)|(startTransition))))\b/g
     );
     if (withLogFile === true) {
       let accumulator: Record<string, number> = {};
@@ -192,11 +196,8 @@ export class CodemodService extends ConfigHandler {
       .map(t => t.split(/\.json/g)?.[0]);
   }
 
-  public handleLogSummary(d: typeof Date, withLogFile: boolean) {
-    const [date, time] = new Date(d.now()).toISOString().split(/T/g) as [
-      string,
-      string
-    ];
+  public handleLogSummary(d: string, withLogFile: boolean) {
+    const [date, time] = d.split(/T/g) as [string, string];
     const [hours, minutes, seconds] = time.split(/Z/g)?.[0]!.split(/:/g) as [
       string,
       string,
@@ -229,7 +230,12 @@ export class CodemodService extends ConfigHandler {
       .then(([_]) => this.handleGitIgnore())
       .then(_ => {
         this.wait(200).then(_val =>
-          Promise.all([this.handleLogSummary(Date, withLogFile)])
+          Promise.all([
+            this.handleLogSummary(
+              new Date(Date.now()).toISOString(),
+              withLogFile
+            )
+          ])
         );
       });
   }
