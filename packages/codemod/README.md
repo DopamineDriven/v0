@@ -1,6 +1,6 @@
-# @dd/codemod
+# @d0paminedriven/codemod
 
-Run a single command to effortlessly prepend Reacts "use client" flag in files matching client-only patterns.
+Run a single command to effortlessly prepend Reacts "use client" flag in files without it containing client-only patterns
 
 ![ddcodemod](./public/ddcodemod.png)
 
@@ -18,4 +18,4 @@ yarn ddcodemod --help
 pnpm ddcodemod --help
 ```
 
-### Package to be available on npm shortly
+### Package available as `@d0paminedriven/codemod` on npm

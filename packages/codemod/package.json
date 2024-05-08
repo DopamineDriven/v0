@@ -1,6 +1,6 @@
 {
   "name": "@dd/codemod",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "files": [
     "dist/**/*.{js,cjs,mjs,ts,cts,mts}"
   ],
