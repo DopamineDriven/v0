@@ -1,4 +1,4 @@
-export { helpFlag, runCodemodClientFlags } from "./bin/init.js";
+export { helpFlag, runCodemodClientFlags, getCount } from "./bin/init.js";
 export { ConfigHandler } from "./config/index.js";
 export { CodemodService } from "./services/codemod/index.js";
 export { TITLE_TEXT, renderTitle } from "./consts/index.js";
