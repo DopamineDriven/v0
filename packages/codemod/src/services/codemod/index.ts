@@ -9,13 +9,18 @@ import { ConfigHandler } from "../../config/index.js";
 export class CodemodService extends ConfigHandler {
   constructor(
     public override cwd: string,
-    public argv: string[]
+    public argv: string[],
+    public logCount: string
   ) {
     super(cwd);
   }
 
-  private isFlagged<const File extends string>(file: File) {
+  private isFlagged<const F extends string>(file: F) {
     return /[`|'|"]+use client+[`|'|"]+[;]?/g.test(file);
+  }
+
+  public isComment() {
+    return /(?:(?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)|(?:(?<!\:|\\\|\')\/\/.*))/gm;
   }
 
   public importPatternRegex() {
@@ -26,10 +31,6 @@ export class CodemodService extends ConfigHandler {
     return /(export (([{]+?\s{0,}(default\s{1,}as\s{1,}|\s)?((React\.)?(use)+[A-Z]{1,1}[a-z]+?[\w]+)\s{0,}[}]?)|((React\.)?(use)+[A-Z]{1,1}[a-z]+?[\w]+)|([*])?) from ['|"]+(.*?)+['|"]+[;]?)/g.test(
       file
     );
-  }
-
-  public get logsDir() {
-    return `.ddcodemod` as const;
   }
 
   public get source() {
@@ -57,9 +58,14 @@ export class CodemodService extends ConfigHandler {
       const fileToBuff = (props: string) => this.fileToBuffer(props);
       this.filterForFiles().forEach(function (v) {
         const data = fileToBuff(v).toString("utf-8");
+        // prevent false positives by omitting comments/commented out code
+        const dataSansComments = data.replace(
+          /(?:(?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)|(?:(?<!\:|\\\|\')\/\/.*))/gm,
+          ""
+        );
         if (
           /(<style\s+jsx>)|\b((React\.)?(((use)+(Breadcrumb|Callback|(Clear|Current|Toggle)?Refinement(s|List)?|Configure|Connector|Context|DynamicWidgets|(Debug|Deferred)Value|(Layout|Insertion)?Effect|Form(State|Status)|GeoSearch|(Hierarchical|Numeric)?Menu|(Infinite)?Hits(PerPage)?|ImperativeHandle|InstantSearch|Memo|Optimistic|Pagination|(Search)?Params|Pathname|PoweredBy|QueryRules|Range|Reducer|Ref|ReportWebVitals|Router|SearchBox|SelectedLayoutSegment|SelectedLayoutSegments|SortBy|State|Stats|SyncExternalStore|Transition))|((create)(Context|Element|Factory|Ref|Root|Portal))|((hydrate)(Root))|((cloneElement)|(findDOMNode)|(flushSync)|(forwardRef)|(isValidElement)|(memo)|(startTransition))))\b/g.test(
-            data
+            dataSansComments
           )
         ) {
           arrMatch.push([v, data]);
@@ -86,28 +92,35 @@ export class CodemodService extends ConfigHandler {
   }
 
   public readOutputLogs() {
-    return this.readDirRecursive(`${this.logsDir}`)
-      .filter(t => /((summary\/*)|\.(gitignore))/g.test(t) === false)
+    if (this.existsSync(`${this.logsDir}/${this.logCount}`)) {
+    return this.readDirRecursive(`${this.logsDir}/${this.logCount}`)
+      .filter(t => /((summary_*)|\.(gitignore))/g.test(t) === false)
       .filter(path => path.split(/\./g).length > 1);
+    }
+    else return null
   }
 
   public extractOutputLogCounts() {
-    return this.readOutputLogs()
+    const output = this.readOutputLogs();
+    if (output) {
+    return output
       .map(
         v =>
           JSON.parse(
-            this.fileToBuffer(`${this.logsDir}/${v}`).toString("utf-8")
+            this.fileToBuffer(`${this.logsDir}/${this.logCount}/${v}`).toString("utf-8")
           ) as OutputLogsShape
       )
       .map(file => {
         return file.counts;
       });
-  }
+  } else return null
+}
 
   public recordAggregation() {
     let r: Record<string, number> = {};
     const countsArr = this.extractOutputLogCounts();
-    if (countsArr.length > 0) {
+
+    if (countsArr && countsArr.length > 0) {
       /* eslint-disable-next-line @typescript-eslint/prefer-for-of */
       for (let i = 0; i < countsArr.length; i++) {
         Object.entries(countsArr[i]!).map(([key, val]) => {
@@ -117,7 +130,7 @@ export class CodemodService extends ConfigHandler {
           {};
       }
       return r;
-    } else return {};
+    } else return 0;
   }
 
   public sortRecord<const T extends Record<string, number>>(record: T) {
@@ -131,21 +144,12 @@ export class CodemodService extends ConfigHandler {
     );
   }
 
-  public readLogsRecursive() {
-    if (this.existsSync(this.logsDir)) {
-      return this.readDirRecursive(this.logsDir)
-        .filter(v => /([0-9])/g.test(v.split(/\//g)[0]!))
-        .filter(t => !t.includes("/"))
-        .length.toString(10);
-    } else return "0";
-  }
-
   public outputFilePatternTrigger<
     const V extends string,
     const F extends string,
     const B extends boolean
   >(val: V, file: F, withLogFile: B) {
-    /* omit imports (1st) and comments (2nd) to prevent false positives */
+    /* omit imports (1st) and comments (2nd) to prevent erroneous reads */
     const valRemoveImportsAndComments = val
       .replace(
         /import(?:(?:(?:[ \n\t]+([^ *\n\t\{\},]+)[ \n\t]*(?:,|[ \n\t]+))?([ \n\t]*\{(?:[ \n\t]*[^ \n\t"'\{\}]+[ \n\t]*,?)+\})?[ \n\t]*)|[ \n\t]*\*[ \n\t]*as[ \n\t]+([^ \n\t\{\}]+)[ \n\t]+)from[ \n\t]*(?:['"])([^'"\n]+)(['"])/g,
@@ -175,7 +179,7 @@ export class CodemodService extends ConfigHandler {
           null,
           2
         ),
-        path: `${this.logsDir}/${file}.json`
+        path: `${this.logsDir}/${this.logCount}/${file}.json`
       });
       return matchRegExpArr;
     } else return matchRegExpArr;
@@ -208,9 +212,13 @@ export class CodemodService extends ConfigHandler {
   }
 
   public get summaryPathsFormatted() {
-    return this.readOutputLogs()
+    const output = this.readOutputLogs();
+    if (output) {
+    return output
       .filter(t => /summary\//g.test(t) === false)
       .map(t => t.split(/\.json/g)?.[0]);
+    }
+    else return [""]
   }
 
   public doesLogDirectoryExist() {
@@ -233,14 +241,18 @@ export class CodemodService extends ConfigHandler {
 
     const [year, month, day] = date.split(/-/g) as [string, string, string];
     const filename =
-      `${this.logsDir}/summary/${year}_${month}_${day}_${hours}_${minutes}_${seconds.split(/\./g)?.[0] ?? seconds}.json` as const;
+      `${this.logsDir}/${this.logCount}/summary_${year}_${month}_${day}_${hours}_${minutes}_${seconds.split(/\./g)?.[0] ?? seconds}.json` as const;
     if (withLogFile === true) {
-      const summaryCounts = this.sortRecord(this.recordAggregation());
+      const getRecs = this.recordAggregation();
+
+
+      const summaryCounts = typeof getRecs === "number" ? getRecs : this.sortRecord(getRecs);
       return this.withWs({
         data: JSON.stringify(
           {
             summary: {
-              fileCount: this.extractOutputLogCounts().length,
+              dirTargeted: this.source,
+              fileCount: this.extractOutputLogCounts()?.length ?? 0,
               counts: summaryCounts,
               files: this.summaryPathsFormatted
             }

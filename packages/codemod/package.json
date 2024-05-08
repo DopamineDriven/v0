@@ -1,6 +1,6 @@
 {
   "name": "@dd/codemod",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "files": [
     "dist/**/*.{js,cjs,mjs,ts,cts,mts}"
   ],
@@ -71,7 +71,6 @@
     "prebuild": "rm -rf dist",
     "build": "tsup",
     "clean": "rm -rf .turbo node_modules dist",
-    "publish": "npm publish --no-git-checks",
     "fix": "npm pkg fix",
     "tree": "rm -rf dist && tree -n -I **node_modules** -H . -T ddcodemod -o tree.html"
   },

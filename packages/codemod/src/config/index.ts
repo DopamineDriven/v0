@@ -319,4 +319,8 @@ export class ConfigHandler {
       options: { recursive: true, encoding: "utf-8" }
     }).map(resolveBuf => this.handleBufStr(resolveBuf));
   }
+
+  public get logsDir() {
+    return `.ddcodemod` as const;
+  }
 }

@@ -272,5 +272,5 @@ export type OutputLogsShape = {
   detected: string[];
   counts: {
     [record: string]: number;
-  };
+  } | null;
 };

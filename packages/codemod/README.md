@@ -18,7 +18,7 @@ pnpm ddcodemod react18 src --logs
 
 ---
 
-- See the [executable](./src/bin/init.ts) file for instructions or run
+- See the [executable](https://github.com/DopamineDriven/v0/blob/master/packages/codemod/src/bin/init.ts) file for instructions or run
 
 ```bash
 npx ddcodemod --help
