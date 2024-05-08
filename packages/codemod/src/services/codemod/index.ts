@@ -1,6 +1,11 @@
 import type { OutputLogsShape } from "../../types/index.js";
 import { ConfigHandler } from "../../config/index.js";
 
+/* eslint-disable prefer-const */
+/* eslint-disable no-useless-escape */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+
 export class CodemodService extends ConfigHandler {
   constructor(
     public override cwd: string,
@@ -8,11 +13,6 @@ export class CodemodService extends ConfigHandler {
   ) {
     super(cwd);
   }
-
-  /* eslint-disable prefer-const */
-  /* eslint-disable no-useless-escape */
-  /* eslint-disable @typescript-eslint/no-non-null-assertion */
-  /* eslint-disable @typescript-eslint/no-floating-promises */
 
   private isFlagged<const File extends string>(file: File) {
     return /[`|'|"]+use client+[`|'|"]+[;]?/g.test(file);
@@ -45,6 +45,10 @@ export class CodemodService extends ConfigHandler {
       .map(prependSrc => `${this.source}/${prependSrc}`);
   }
 
+  public detectStyleJsx() {
+    return /(<style\s+jsx>)/g;
+  }
+
   public recursivelyReadAndSort(
     arrMatch: [string, string][] = Array.of<[string, string]>(),
     arrNoMatch: [string, string][] = Array.of<[string, string]>()
@@ -54,7 +58,7 @@ export class CodemodService extends ConfigHandler {
       this.filterForFiles().forEach(function (v) {
         const data = fileToBuff(v).toString("utf-8");
         if (
-          /\b((React\.)?(((use)+(Breadcrumb|Callback|(Clear|Current|Toggle)?Refinement(s|List)?|Configure|Connector|Context|DynamicWidgets|(Debug|Deferred)Value|(Layout|Insertion)?Effect|Form(State|Status)|GeoSearch|(Hierarchical|Numeric)?Menu|(Infinite)?Hits(PerPage)?|ImperativeHandle|InstantSearch|Memo|Optimistic|Pagination|(Search)?Params|Pathname|PoweredBy|QueryRules|Range|Reducer|Ref|ReportWebVitals|Router|SearchBox|SelectedLayoutSegment|SelectedLayoutSegments|SortBy|State|Stats|SyncExternalStore|Transition))|((create)(Context|Element|Factory|Ref|Root|Portal))|((hydrate)(Root))|((cloneElement)|(findDOMNode)|(flushSync)|(forwardRef)|(isValidElement)|(memo)|(startTransition))))\b/g.test(
+          /(<style\s+jsx>)|\b((React\.)?(((use)+(Breadcrumb|Callback|(Clear|Current|Toggle)?Refinement(s|List)?|Configure|Connector|Context|DynamicWidgets|(Debug|Deferred)Value|(Layout|Insertion)?Effect|Form(State|Status)|GeoSearch|(Hierarchical|Numeric)?Menu|(Infinite)?Hits(PerPage)?|ImperativeHandle|InstantSearch|Memo|Optimistic|Pagination|(Search)?Params|Pathname|PoweredBy|QueryRules|Range|Reducer|Ref|ReportWebVitals|Router|SearchBox|SelectedLayoutSegment|SelectedLayoutSegments|SortBy|State|Stats|SyncExternalStore|Transition))|((create)(Context|Element|Factory|Ref|Root|Portal))|((hydrate)(Root))|((cloneElement)|(findDOMNode)|(flushSync)|(forwardRef)|(isValidElement)|(memo)|(startTransition))))\b/g.test(
             data
           )
         ) {
@@ -81,14 +85,14 @@ export class CodemodService extends ConfigHandler {
       .join(`\n`);
   }
 
-  public get readOutputLogs() {
+  public readOutputLogs() {
     return this.readDirRecursive(`${this.logsDir}`)
-      .filter(t => /\.gitignore/g.test(t) === false)
+      .filter(t => /((summary\/*)|\.(gitignore))/g.test(t) === false)
       .filter(path => path.split(/\./g).length > 1);
   }
 
-  public get extractOutputLogCounts() {
-    return this.readOutputLogs
+  public extractOutputLogCounts() {
+    return this.readOutputLogs()
       .map(
         v =>
           JSON.parse(
@@ -102,16 +106,18 @@ export class CodemodService extends ConfigHandler {
 
   public recordAggregation() {
     let r: Record<string, number> = {};
-    const countsArr = this.extractOutputLogCounts;
-    /* eslint-disable-next-line @typescript-eslint/prefer-for-of */
-    for (let i = 0; i < countsArr.length; i++) {
-      Object.entries(countsArr[i]!).map(([key, val]) => {
-        r[key] = (r[key]! || 0) + val;
-        return r;
-      }),
-        {};
-    }
-    return r;
+    const countsArr = this.extractOutputLogCounts();
+    if (countsArr.length > 0) {
+      /* eslint-disable-next-line @typescript-eslint/prefer-for-of */
+      for (let i = 0; i < countsArr.length; i++) {
+        Object.entries(countsArr[i]!).map(([key, val]) => {
+          r[key] = (r[key]! || 0) + val;
+          return r;
+        }),
+          {};
+      }
+      return r;
+    } else return {};
   }
 
   public sortRecord<const T extends Record<string, number>>(record: T) {
@@ -125,19 +131,34 @@ export class CodemodService extends ConfigHandler {
     );
   }
 
+  public readLogsRecursive() {
+    if (this.existsSync(this.logsDir)) {
+      return this.readDirRecursive(this.logsDir)
+        .filter(v => /([0-9])/g.test(v.split(/\//g)[0]!))
+        .filter(t => !t.includes("/"))
+        .length.toString(10);
+    } else return "0";
+  }
+
   public outputFilePatternTrigger<
     const V extends string,
     const F extends string,
     const B extends boolean
   >(val: V, file: F, withLogFile: B) {
-    const valRemoveImports = val.replace(
-      /import(?:(?:(?:[ \n\t]+([^ *\n\t\{\},]+)[ \n\t]*(?:,|[ \n\t]+))?([ \n\t]*\{(?:[ \n\t]*[^ \n\t"'\{\}]+[ \n\t]*,?)+\})?[ \n\t]*)|[ \n\t]*\*[ \n\t]*as[ \n\t]+([^ \n\t\{\}]+)[ \n\t]+)from[ \n\t]*(?:['"])([^'"\n]+)(['"])/g,
-      ""
+    /* omit imports (1st) and comments (2nd) to prevent false positives */
+    const valRemoveImportsAndComments = val
+      .replace(
+        /import(?:(?:(?:[ \n\t]+([^ *\n\t\{\},]+)[ \n\t]*(?:,|[ \n\t]+))?([ \n\t]*\{(?:[ \n\t]*[^ \n\t"'\{\}]+[ \n\t]*,?)+\})?[ \n\t]*)|[ \n\t]*\*[ \n\t]*as[ \n\t]+([^ \n\t\{\}]+)[ \n\t]+)from[ \n\t]*(?:['"])([^'"\n]+)(['"])/g,
+        ""
+      )
+      .replace(
+        /(?:(?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)|(?:(?<!\:|\\\|\')\/\/.*))/gm,
+        ""
+      );
+    const matchRegExpArr = valRemoveImportsAndComments.match(
+      /(<style\s+jsx>)|\b((React\.)?(((use)+(Breadcrumb|Callback|(Clear|Current|Toggle)?Refinement(s|List)?|Configure|Connector|Context|DynamicWidgets|(Debug|Deferred)Value|(Layout|Insertion)?Effect|Form(State|Status)|GeoSearch|(Hierarchical|Numeric)?Menu|(Infinite)?Hits(PerPage)?|ImperativeHandle|InstantSearch|Memo|Optimistic|Pagination|(Search)?Params|Pathname|PoweredBy|QueryRules|Range|Reducer|Ref|ReportWebVitals|Router|SearchBox|SelectedLayoutSegment|SelectedLayoutSegments|SortBy|State|Stats|SyncExternalStore|Transition))|((create)(Context|Element|Factory|Ref|Root|Portal))|((hydrate)(Root))|((cloneElement)|(findDOMNode)|(flushSync)|(forwardRef)|(isValidElement)|(memo)|(startTransition))))\b/g
     );
-    const matchRegExpArr = valRemoveImports.match(
-      /\b((React\.)?(((use)+(Breadcrumb|Callback|(Clear|Current|Toggle)?Refinement(s|List)?|Configure|Connector|Context|DynamicWidgets|(Debug|Deferred)Value|(Layout|Insertion)?Effect|Form(State|Status)|GeoSearch|(Hierarchical|Numeric)?Menu|(Infinite)?Hits(PerPage)?|ImperativeHandle|InstantSearch|Memo|Optimistic|Pagination|(Search)?Params|Pathname|PoweredBy|QueryRules|Range|Reducer|Ref|ReportWebVitals|Router|SearchBox|SelectedLayoutSegment|SelectedLayoutSegments|SortBy|State|Stats|SyncExternalStore|Transition))|((create)(Context|Element|Factory|Ref|Root|Portal))|((hydrate)(Root))|((cloneElement)|(findDOMNode)|(flushSync)|(forwardRef)|(isValidElement)|(memo)|(startTransition))))\b/g
-    );
-    if (withLogFile === true) {
+    if (withLogFile === true && matchRegExpArr) {
       let accumulator: Record<string, number> = {};
       matchRegExpArr?.forEach(function (match) {
         /* eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing */
@@ -187,9 +208,13 @@ export class CodemodService extends ConfigHandler {
   }
 
   public get summaryPathsFormatted() {
-    return this.readOutputLogs
+    return this.readOutputLogs()
       .filter(t => /summary\//g.test(t) === false)
       .map(t => t.split(/\.json/g)?.[0]);
+  }
+
+  public doesLogDirectoryExist() {
+    return this.existsSync(this.logsDir);
   }
 
   public handleLogSummary(d: typeof Date, withLogFile: boolean) {
@@ -202,6 +227,10 @@ export class CodemodService extends ConfigHandler {
       string,
       string
     ];
+    // if (this.doesLogDirectoryExist() === true) {
+    //   this.executeCommand({ command: `rm -rf ${this.logsDir}/summary*` });
+    // }
+
     const [year, month, day] = date.split(/-/g) as [string, string, string];
     const filename =
       `${this.logsDir}/summary/${year}_${month}_${day}_${hours}_${minutes}_${seconds.split(/\./g)?.[0] ?? seconds}.json` as const;
@@ -211,7 +240,7 @@ export class CodemodService extends ConfigHandler {
         data: JSON.stringify(
           {
             summary: {
-              fileCount: this.extractOutputLogCounts.length,
+              fileCount: this.extractOutputLogCounts().length,
               counts: summaryCounts,
               files: this.summaryPathsFormatted
             }

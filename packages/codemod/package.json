@@ -1,6 +1,6 @@
 {
   "name": "@dd/codemod",
-  "version": "1.0.7",
+  "version": "2.1.0",
   "files": [
     "dist/**/*.{js,cjs,mjs,ts,cts,mts}"
   ],
@@ -8,6 +8,30 @@
   "sideEffects": true,
   "type": "module",
   "description": "codemods to combat boring repetitive tasks",
+  "publishConfig": {
+    "access": "public",
+    "typesVersions": {
+      "*": {
+        "*": [
+          "dist/*.d.ts",
+          "dist/*/index.d.ts",
+          "dist/*.d.cts"
+        ],
+        "bin": [
+          "dist/bin/init.d.ts"
+        ],
+        "config": [
+          "dist/config/index.d.ts"
+        ],
+        "services": [
+          "dist/services/codemod/index.d.ts"
+        ],
+        "types": [
+          "dist/types/index.d.ts"
+        ]
+      }
+    }
+  },
   "typesVersions": {
     "*": {
       "*": [
@@ -73,15 +97,15 @@
     "@dd/eslint-config": "workspace:*",
     "@dd/prettier-config": "workspace:*",
     "@dd/tsconfig": "workspace:*",
-    "@microsoft/api-extractor": "^7.43.1",
-    "@swc/core": "^1.4.17",
+    "@microsoft/api-extractor": "^7.43.2",
+    "@swc/core": "^1.5.3",
     "@types/gradient-string": "^1.1.6",
-    "@types/node": "^20.12.8",
+    "@types/node": "^20.12.10",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
     "chokidar": "^3.6.0",
     "dotenv": "^16.4.5",
-    "dotenv-cli": "^7.4.1",
+    "dotenv-cli": "^7.4.2",
     "dotenv-expand": "^11.0.6",
     "eslint": "^9.2.0",
     "next": "^14.2.3",
@@ -91,7 +115,7 @@
     "terser": "^5.31.0",
     "tslib": "^2.6.2",
     "tsup": "^8.0.2",
-    "tsx": "^4.9.0",
+    "tsx": "^4.9.3",
     "typescript": "^5.4.5"
   },
   "prettier": "@dd/prettier-config"
